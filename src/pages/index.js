@@ -168,7 +168,7 @@ export default function Home() {
             <ul>
               {
                 core_features.map((feature, index) => (
-                  <li key={`cf-${index}`} className='text-5 before:content-[""] before:inline-block before:bg-checked-box before:bg-contain before:bg-no-repeat before:bg-center before:w-[2rem] before:h-[2rem] before:mr-4 before:align-bottom my-4'>
+                  <li key={`cf-${index}`} className='ml-12 -indent-12 text-5 before:content-[""] before:inline-block before:bg-checked-box before:bg-contain before:bg-no-repeat before:bg-center before:w-[2rem] before:h-[2rem] before:mr-4 before:align-bottom my-4'>
                     {feature}
                   </li>
                 ))
@@ -184,8 +184,8 @@ export default function Home() {
           <div className='snap-start snap-proximity flex flex-row flex-wrap-reverse md:flex-wrap'>
             {
               pricing.map((section, index) => (
-                <div key={`pr-${index}`} className='flex flex-1 h-full flex-col justify-center items-center align-middle'>
-                  <div className={`mx-4 px-4 py-7 min-w-[400px] ${index === 0 ? '':'rounded-md border-trusty-500 border-2 bg-trusty-200'}`}>
+                <div key={`pr-${index}`} className='snap-proximity snap-start flex w-screen md:flex-1 h-full flex-col justify-center items-center align-middle'>
+                  <div className={`mx-4 px-4 py-7 my-8 md:min-w-[400px] ${index === 0 ? '':'rounded-md border-trusty-500 border-2 bg-trusty-200'}`}>
                     <h4 className={`text-2 ${index === 1 ? 'text-trusty-500': 'text-trusty-400'} text-center !font-medium`}>{section.title}</h4>
                     <p className='text-4 !font-normal mb-4 text-center'>
                       {
