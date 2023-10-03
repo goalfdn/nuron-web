@@ -3,25 +3,103 @@
 @tailwind utilities;
 
 :root {
+  --dark-teal: 8, 61, 52;
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
-
+/* 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+} */
+
+html {
+  scroll-snap-type: y mandatory;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  @apply font-sans;
+  @apply text-text-black;
+  @apply bg-trusty-500;
+}
+
+h1, h2, h3, h4 {
+  @apply font-serif;
+}
+
+h1 {
+  @apply text-4xl;
+  @apply md:text-5xl;
+  @apply lg:text-6xl;
+  @apply text-serenity;
+}
+
+h2 {
+  @apply text-3xl;
+  @apply md:text-4xl;
+  @apply lg:text-5xl;
+  @apply text-trusty-500;
+}
+
+h3 {
+  @apply text-2xl;
+  @apply md:text-3xl;
+  @apply lg:text-4xl;
+  @apply text-trusty-300;
+}
+
+h4 {
+  @apply text-2xl;
+  @apply md:text-3xl;
+  @apply lg:text-4xl;
+  @apply text-trusty-400;
+}
+
+h5 {
+  @apply text-xl;
+  @apply md:text-2xl;
+  @apply lg:text-3xl;
+}
+
+.text-1, .text-2, .text-3, .text-4, .text-5 {
+  @apply font-sans;
+}
+
+.text-1 {
+  @apply text-3xl;
+  @apply md:text-4xl;
+  @apply lg:text-5xl;
+  @apply font-light;
+}
+
+.text-2 {
+  @apply text-2xl;
+  @apply md:text-3xl;
+  @apply lg:text-4xl;
+  @apply font-normal;
+}
+
+.text-3 {
+  @apply text-xl;
+  @apply md:text-2xl;
+  @apply lg:text-3xl;
+  @apply font-medium;
+}
+
+.text-4 {
+  @apply text-lg;
+  @apply md:text-xl;
+  @apply lg:text-2xl;
+  @apply font-bold;
+}
+
+.text-5 {
+  @apply text-base;
+  @apply md:text-lg;
+  @apply lg:text-xl;
+  @apply font-normal;
 }
