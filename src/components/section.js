@@ -5,8 +5,9 @@ import Carousel from "./carousel";
 
 export default function Section({ heading, children, color = 'bg-transparent' }) {
 
-  const [isScrolling, setIsScrolling] = useState(false);
   const [scrollTimeout, setScrollTimeout] = useState(null);
+  const [touchStartX, setTouchStartX] = useState(0);
+  const [touchStartY, setTouchStartY] = useState(0);
   const [currentOffset, setCurrentOffset] = useState(0);
   const [fullWidth, setFullWidth] = useState(0);
   const sectionElement = useRef();
@@ -16,8 +17,8 @@ export default function Section({ heading, children, color = 'bg-transparent' })
       !!sectionElement.current &&
       sectionElement.current.offsetWidth !== fullWidth
     ) {
-      console.log('Old dimensions: ', fullWidth, currentOffset);
-      console.log('New dimensions: ', sectionElement.current.offsetWidth, Math.floor(currentOffset / fullWidth) * sectionElement.current.offsetWidth)
+      // console.log('Old dimensions: ', fullWidth, currentOffset);
+      // console.log('New dimensions: ', sectionElement.current.offsetWidth, Math.floor(currentOffset / fullWidth) * sectionElement.current.offsetWidth)
       setCurrentOffset(
         Math.floor(currentOffset / fullWidth) *
         sectionElement.current.offsetWidth
@@ -27,26 +28,16 @@ export default function Section({ heading, children, color = 'bg-transparent' })
   }, [currentOffset, fullWidth]);
 
   const handleMouseScroll = useCallback((event) => {
-    if (Math.abs(event.deltaX) >= Math.abs(event.deltaY)) {
-      return;
-    }
-    
     if (!!scrollTimeout) {
       event.preventDefault();
-      // console.log('Scrolling...');
       clearTimeout(scrollTimeout);
-      let timeout = setTimeout(() => {
-        // console.log('Scroll ended!');
+      setScrollTimeout(setTimeout(() => {
         setScrollTimeout(null);
-      }, 50);
-      setScrollTimeout(timeout);
+      }, 50));
       return;
     }
     
     let scrollOffset = event.deltaY;
-
-    // console.log(`Scrolling ${scrollOffset > 0 ? 'DOWN':'UP'} [Offset: ${currentOffset}]`);
-    setIsScrolling(true);
     
     if (
       (scrollOffset < 0 && currentOffset === 0) ||
@@ -57,85 +48,100 @@ export default function Section({ heading, children, color = 'bg-transparent' })
     }
 
     event.preventDefault();
-    clearTimeout(scrollTimeout);
-    setScrollTimeout(setTimeout(
-      () => {
-        // console.log('Scroll ended!');
-        setScrollTimeout(null);
-      },
-      50
-    ));
-    
-    if (scrollOffset < 0) {
-      setCurrentOffset(currentOffset + fullWidth);
-    } else {
-      setCurrentOffset(currentOffset - fullWidth);
+
+    if (!scrollTimeout) {
+      // console.log(`Scrolling ${scrollOffset > 0 ? 'DOWN':'UP'} [Offset: ${currentOffset}]`);
+
+      if (Math.abs(event.deltaX) >= Math.abs(event.deltaY)) {
+        return;
+      }
+      if (scrollOffset < 0) {
+        setCurrentOffset(currentOffset + fullWidth);
+      } else {
+        setCurrentOffset(currentOffset - fullWidth);
+      }
     }
-  }, [children, currentOffset, fullWidth, scrollTimeout]);
+    setScrollTimeout(setTimeout(() => {
+      setScrollTimeout(null);
+    }, 50));
+  }, [
+    children,
+    currentOffset,
+    fullWidth,
+    scrollTimeout
+  ]);
 
   const handleTouch = useCallback((event) => {
-    const xStart = event.touches[0].clientX;
-    const yStart = event.touches[0].clientY;
+    console.log('touched');
     const xEnd = event.touches[event.touches.length - 1].clientX;
     const yEnd = event.touches[event.touches.length - 1].clientY;
     
-    const dy = yEnd - yStart;
-    const dx = xEnd - xStart;
-
-    if (Math.abs(dx) >= Math.abs(dy)) {
-      return;
-    }
+    const dy = yEnd - touchStartY;
+    const dx = xEnd - touchStartX;
+    console.log(event.changedTouches);
+    console.log(`X: ${dx}, Y: ${dy}`);
 
     if (!!scrollTimeout) {
       event.preventDefault();
       clearTimeout(scrollTimeout);
-      let timeout = setTimeout(() => {
-        // console.log('Scroll ended!');
+      setScrollTimeout(setTimeout(() => {
         setScrollTimeout(null);
-      }, 50);
-      setScrollTimeout(timeout);
+      }, 50));
       return;
     }
-
-    let scrollOffset = dy;
-
-    // console.log(`Scrolling ${scrollOffset > 0 ? 'DOWN':'UP'} [Offset: ${currentOffset}]`);
-    setIsScrolling(true);
+    
+    let scrollOffset = -dy;
     
     if (
       (scrollOffset < 0 && currentOffset === 0) ||
       (scrollOffset > 0 && currentOffset === (Children.count(children) - 1) * (-fullWidth))
     ) {
-      // console.log('No more horizontal scroll');
+      console.log('No more horizontal scroll');
       return;
     }
 
     event.preventDefault();
-    clearTimeout(scrollTimeout);
-    setScrollTimeout(setTimeout(
-      () => {
-        // console.log('Scroll ended!');
-        setScrollTimeout(null);
-      },
-      50
-    ));
-    
-    if (scrollOffset < 0) {
-      setCurrentOffset(currentOffset + fullWidth);
-    } else {
-      setCurrentOffset(currentOffset - fullWidth);
+
+    if (!scrollTimeout) {
+      console.log(`Scrolling ${scrollOffset > 0 ? 'DOWN':'UP'} [Offset: ${currentOffset}]`);
+
+      if (scrollOffset < 0) {
+        setCurrentOffset(currentOffset + fullWidth);
+      } else {
+        setCurrentOffset(currentOffset - fullWidth);
+      }
     }
-  }, [children, currentOffset, fullWidth, scrollTimeout]);
+    setScrollTimeout(setTimeout(() => {
+      setScrollTimeout(null);
+    }, 50));
+  }, [
+    children,
+    currentOffset,
+    fullWidth,
+    scrollTimeout,
+    touchStartX,
+    touchStartY
+  ]);
 
   useEffect(() => {
     const el = sectionElement.current;
 
     setFullWidth(el.offsetWidth);
+
+    const handleTouchStart = (event) => {
+      setTouchStartX(event.touches[0].clientX);
+      setTouchStartY(event.touches[0].clientY);
+    };
     
     window.addEventListener('resize', handleResize, false);
     el.addEventListener(
       'wheel',
       handleMouseScroll,
+      {capture: true, passive:false}
+    );
+    el.addEventListener(
+      'touchstart',
+      handleTouchStart,
       {capture: true, passive:false}
     );
     el.addEventListener(
@@ -152,22 +158,21 @@ export default function Section({ heading, children, color = 'bg-transparent' })
         {capture: true, passive:false}
       );
       el.removeEventListener(
+        'touchstart',
+        handleTouchStart,
+        {capture: true, passive:false}
+      );
+      el.removeEventListener(
         'touchmove',
         handleTouch,
         {capture: true, passive:false}
       );
     };
-  }, [handleResize, handleMouseScroll, handleTouch]);
-
-  useEffect(() => {
-    
   }, [
-    currentOffset,
-    children,
     sectionElement,
-    fullWidth,
-    isScrolling,
-    scrollTimeout
+    handleResize,
+    handleMouseScroll,
+    handleTouch
   ]);
   
   return (
@@ -175,7 +180,7 @@ export default function Section({ heading, children, color = 'bg-transparent' })
       {
         (!!heading) &&
         <div className="container mx-auto mt-8 mb-4 px-4">
-          <h2 className={(color === 'bg-transparent') ? 'text-trusty-100': ''}>{heading}</h2>
+          <h2 className={(color === 'bg-transparent') ? 'text-trusty-50': ''}>{heading}</h2>
         </div>
       }
       <div className="grow">

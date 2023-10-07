@@ -160,21 +160,21 @@ export default function Home() {
           </div>
         </div>
       </Section> */}
-      <Section color=' bg-trusty-300'>
+      <Section color='bg-trusty-300'>
         <div className='px-4 container h-full mx-auto flex flex-col'>
-          <p className='text-3 !font-medium text-trusty-400 mt-8'>{"A fusion of science, technology and personal journeys..."}</p>
-          <p className='text-2 !font-normal text-trusty-500 text-right py-4'>{"Nuron launches on all major platforms in Spring 2024"}</p>
+          <p className='text-4 sm:text-3 !font-medium text-trusty-400 mt-8'>{"A fusion of science, technology and personal journeys..."}</p>
+          <p className='text-3 sm:text-2 !font-normal text-trusty-500 text-right py-4'>{"Nuron launches on all major platforms in Spring 2024"}</p>
           <div className='flex flex-1 flex-col justify-center items-center'>
             <ul>
               {
                 core_features.map((feature, index) => (
-                  <li key={`cf-${index}`} className='ml-12 -indent-12 text-5 before:content-[""] before:inline-block before:bg-checked-box before:bg-contain before:bg-no-repeat before:bg-center before:w-[2rem] before:h-[2rem] before:mr-4 before:align-bottom my-4'>
+                  <li key={`cf-${index}`} className={`ml-12 -indent-12 text-5 before:content-[""] before:inline-block before:bg-checked-box before:bg-contain before:bg-no-repeat before:bg-center before:w-[2rem] before:h-[2rem] before:mr-4 before:align-bottom my-2 sm:my-4 ${index > 3 ? 'hidden sm:block' : ''}`}>
                     {feature}
                   </li>
                 ))
               }
-              <li className='text-5'>...and more</li>
             </ul>
+            <p className='text-5 w-full text-right pt-2 sm:pt-4'>...and more</p>
           </div>
         </div>
       </Section>

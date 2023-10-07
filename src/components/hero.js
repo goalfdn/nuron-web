@@ -1,7 +1,15 @@
 
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 export default function Hero() {
+  const [isSafari, setIsSafari] = useState(false);
+  
+  useEffect(() => {
+    const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
+    setIsSafari(isSafari);
+  }, []);
+  
   return (
     <div className="h-screen w-screen snap-always snap-start flex flex-col">
       <h1 className="text-center pt-8">nuron</h1>
@@ -16,13 +24,13 @@ export default function Hero() {
       <div className="flex flex-row my-4 space-x-8 justify-center items-center align-middle">
         <button
           className="text-5 pt-1 pb-2 px-7 rounded-md bg-trusty-100 hover:cursor-pointer hover:bg-serenity text-trusty-500 !font-medium max-w-fit"
-          onClick={() => { document.getElementById('pricing').scrollIntoView({behavior:'smooth'}); }}
+          onClick={() => { document.getElementById('pricing').scrollIntoView({behavior:isSafari ? 'auto' : 'smooth'}); }}
         >
           {"I'm Ready!"}
         </button>
         <a
           className="hover:cursor-pointer hover:text-serenity hover:!font-medium leading-relaxed underline-offset-4 decoration-serenity text-5 text-trusty-100 !font-normal"
-          onClick={() => { document.getElementById('after-hero').scrollIntoView({behavior:'smooth'}); }}
+          onClick={() => { document.getElementById('after-hero').scrollIntoView({behavior:isSafari ? 'auto' : 'smooth'}); }}
         >
           {"Tell Me More"}
         </a>
