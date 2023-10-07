@@ -129,6 +129,7 @@ export default function Section({ heading, children, color = 'bg-transparent' })
     setFullWidth(el.offsetWidth);
 
     const handleTouchStart = (event) => {
+      event.preventDefault();
       setTouchStartX(event.touches[0].clientX);
       setTouchStartY(event.touches[0].clientY);
     };
