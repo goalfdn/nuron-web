@@ -137,17 +137,17 @@ export default function Section({ heading, children, color = 'bg-transparent' })
     el.addEventListener(
       'wheel',
       handleMouseScroll,
-      {capture: true, passive:false}
+      {capture: false, passive:false}
     );
     el.addEventListener(
       'touchstart',
       handleTouchStart,
-      {capture: true, passive:false}
+      {capture: false, passive:false}
     );
     el.addEventListener(
       'touchmove',
       handleTouch,
-      {capture: true, passive:false}
+      {capture: false, passive:false}
     );
 
     return () => {
@@ -155,17 +155,17 @@ export default function Section({ heading, children, color = 'bg-transparent' })
       el.removeEventListener(
         'wheel',
         handleMouseScroll,
-        {capture: true, passive:false}
+        {capture: false, passive:false}
       );
       el.removeEventListener(
         'touchstart',
         handleTouchStart,
-        {capture: true, passive:false}
+        {capture: false, passive:false}
       );
       el.removeEventListener(
         'touchmove',
         handleTouch,
-        {capture: true, passive:false}
+        {capture: false, passive:false}
       );
     };
   }, [
