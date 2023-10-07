@@ -86,7 +86,7 @@ export default function Section({ heading, children, color = 'bg-transparent' })
       clearTimeout(scrollTimeout);
       setScrollTimeout(setTimeout(() => {
         setScrollTimeout(null);
-      }, 50));
+      }, 250));
       return;
     }
     
@@ -113,7 +113,7 @@ export default function Section({ heading, children, color = 'bg-transparent' })
     }
     setScrollTimeout(setTimeout(() => {
       setScrollTimeout(null);
-    }, 50));
+    }, 250));
   }, [
     children,
     currentOffset,
