@@ -72,14 +72,11 @@ export default function Section({ heading, children, color = 'bg-transparent' })
   ]);
 
   const handleTouch = useCallback((event) => {
-    console.log('touched');
-    const xEnd = event.touches[event.touches.length - 1].clientX;
-    const yEnd = event.touches[event.touches.length - 1].clientY;
+    const xEnd = event.touches[0].clientX;
+    const yEnd = event.touches[0].clientY;
     
     const dy = yEnd - touchStartY;
     const dx = xEnd - touchStartX;
-    console.log(event.changedTouches);
-    console.log(`X: ${dx}, Y: ${dy}`);
 
     if (!!scrollTimeout) {
       event.preventDefault();
@@ -129,7 +126,6 @@ export default function Section({ heading, children, color = 'bg-transparent' })
     setFullWidth(el.offsetWidth);
 
     const handleTouchStart = (event) => {
-      event.preventDefault();
       setTouchStartX(event.touches[0].clientX);
       setTouchStartY(event.touches[0].clientY);
     };
@@ -140,7 +136,7 @@ export default function Section({ heading, children, color = 'bg-transparent' })
       handleMouseScroll,
       {capture: false, passive:false}
     );
-    el.addEventListener(
+    window.addEventListener(
       'touchstart',
       handleTouchStart,
       {capture: false, passive:false}
@@ -158,7 +154,7 @@ export default function Section({ heading, children, color = 'bg-transparent' })
         handleMouseScroll,
         {capture: false, passive:false}
       );
-      el.removeEventListener(
+      window.removeEventListener(
         'touchstart',
         handleTouchStart,
         {capture: false, passive:false}
