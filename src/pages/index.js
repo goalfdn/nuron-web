@@ -4,6 +4,7 @@ import Hero from '@/components/hero';
 import Section from '@/components/section';
 import Quote from '@/components/quote';
 import USP from '@/components/usp';
+import { useRef } from 'react';
 
 const usp = [
   {
@@ -101,32 +102,36 @@ const pricing = [
 ];
 
 export default function Home() {
+  const primaryScrollActionRef = useRef();
+  const secondaryScrollActionRef = useRef();
   
   return (
     <div className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Hero />
-      <Section color='bg-trusty-100'>
-        <div id='after-hero' className='mx-auto h-full container pt-8 pb-14 px-4 flex flex-col justify-between'>
-          <h2 className='text-trusty-500'>driven by intuition...</h2>
-          <ul className='h-full flex flex-col justify-center items-center'>
-            <li className='my-3'><p className='text-trusty-400 text-center text-1'>Your highest goals</p></li>
-            <li className='my-3'><p className='text-trusty-400 text-center text-2'>Your greatest values</p></li>
-            <li className='my-3'><p className='text-trusty-400 text-center text-3'>Your deepest thoughts</p></li>
-            <li className='my-3'><p className='text-trusty-400 text-center text-4'>Your strongest emotions</p></li>
-          </ul>
-        </div>
-        <div className='w-screen h-full bg-trusty-400'>
-          <div className='mx-auto h-full container pt-8 pb-14 px-4 flex flex-col justify-between'>
-            <h2 className='text-right text-trusty-100'>...backed by evidence</h2>
+      <Hero primaryScrollActionRef={primaryScrollActionRef} secondaryScrollActionRef={secondaryScrollActionRef} />
+      <div ref={primaryScrollActionRef}>
+        <Section color='bg-trusty-100'>
+          <div id='after-hero' className='mx-auto h-full container pt-8 pb-14 px-4 flex flex-col justify-between'>
+            <h2 className='text-trusty-500'>driven by intuition...</h2>
             <ul className='h-full flex flex-col justify-center items-center'>
-              <li className='my-3'><p className='text-trusty-200 text-center text-4'>MCII for Goal Achievement</p></li>
-              <li className='my-3'><p className='text-trusty-200 text-center text-3'>DSM-5 Self-Reporting Measures</p></li>
-              <li className='my-3'><p className='text-trusty-200 text-center text-2'>Schwartz&apos;s Theory of Basic Human Values</p></li>
-              <li className='my-3'><p className='text-trusty-200 text-center text-1'>Leading Cognitive-Behavioral Principles</p></li>
+              <li className='my-3'><p className='text-trusty-400 text-center text-1'>Your highest goals</p></li>
+              <li className='my-3'><p className='text-trusty-400 text-center text-2'>Your greatest values</p></li>
+              <li className='my-3'><p className='text-trusty-400 text-center text-3'>Your deepest thoughts</p></li>
+              <li className='my-3'><p className='text-trusty-400 text-center text-4'>Your strongest emotions</p></li>
             </ul>
           </div>
-        </div>
-      </Section>
+          <div className='w-screen h-full bg-trusty-400'>
+            <div className='mx-auto h-full container pt-8 pb-14 px-4 flex flex-col justify-between'>
+              <h2 className='text-right text-trusty-100'>...backed by evidence</h2>
+              <ul className='h-full flex flex-col justify-center items-center'>
+                <li className='my-3'><p className='text-trusty-200 text-center text-4'>MCII for Goal Achievement</p></li>
+                <li className='my-3'><p className='text-trusty-200 text-center text-3'>DSM-5 Self-Reporting Measures</p></li>
+                <li className='my-3'><p className='text-trusty-200 text-center text-2'>Schwartz&apos;s Theory of Basic Human Values</p></li>
+                <li className='my-3'><p className='text-trusty-200 text-center text-1'>Leading Cognitive-Behavioral Principles</p></li>
+              </ul>
+            </div>
+          </div>
+        </Section>
+      </div>
       <Section heading="the nuron way..." color='bg-trusty-200 text-center'>
         {
           usp.map((item, index) => (
@@ -178,7 +183,7 @@ export default function Home() {
           </div>
         </div>
       </Section>
-      <div id='pricing' className='snap-proximity snap-start w-screen py-8 bg-trusty-100'>
+      <div id='pricing' ref={secondaryScrollActionRef} className='snap-proximity snap-start w-screen py-8 bg-trusty-100'>
         <div className='container mx-auto flex flex-col'>
           <h2 className='text-trusty-500 mb-8 px-4'>the early bird...</h2>
           <div className='snap-start snap-proximity flex flex-row flex-wrap-reverse md:flex-wrap'>

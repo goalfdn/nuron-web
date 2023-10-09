@@ -21,6 +21,12 @@ html {
   scroll-snap-type: y mandatory;
 }
 
+@supports (-webkit-touch-callout: none) {
+  .h-screen {
+    height: -webkit-fill-available;
+  }
+}
+
 body {
   @apply font-sans;
   @apply text-text-black;

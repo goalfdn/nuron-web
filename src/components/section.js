@@ -2,30 +2,16 @@
 
 import { useEffect, Children, useRef, useState, useCallback } from "react";
 import Carousel from "./carousel";
+import { useWidth } from "@/util/useWidth";
 
 export default function Section({ heading, children, color = 'bg-transparent' }) {
 
   const [scrollTimeout, setScrollTimeout] = useState(null);
   const [touchStartX, setTouchStartX] = useState(0);
   const [touchStartY, setTouchStartY] = useState(0);
-  const [currentOffset, setCurrentOffset] = useState(0);
-  const [fullWidth, setFullWidth] = useState(0);
+  const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const sectionElement = useRef();
-
-  const handleResize = useCallback(() => {
-    if (
-      !!sectionElement.current &&
-      sectionElement.current.offsetWidth !== fullWidth
-    ) {
-      // console.log('Old dimensions: ', fullWidth, currentOffset);
-      // console.log('New dimensions: ', sectionElement.current.offsetWidth, Math.floor(currentOffset / fullWidth) * sectionElement.current.offsetWidth)
-      setCurrentOffset(
-        Math.floor(currentOffset / fullWidth) *
-        sectionElement.current.offsetWidth
-      );
-      setFullWidth(sectionElement.current.offsetWidth);
-    }
-  }, [currentOffset, fullWidth]);
+  const sectionWidth = useWidth(sectionElement);
 
   const handleMouseScroll = useCallback((event) => {
     if (!!scrollTimeout) {
@@ -38,27 +24,34 @@ export default function Section({ heading, children, color = 'bg-transparent' })
     }
     
     let scrollOffset = event.deltaY;
+    if (event.deltaY === 0 || Math.abs(event.deltaX) >= Math.abs(event.deltaY)) {
+      scrollOffset = event.deltaX;
+    }
     
     if (
-      (scrollOffset < 0 && currentOffset === 0) ||
-      (scrollOffset > 0 && currentOffset === (Children.count(children) - 1) * (-fullWidth))
+      (scrollOffset < 0 && currentPageIndex === 0) ||
+      (scrollOffset > 0 && currentPageIndex === Children.count(children) - 1)
     ) {
       // console.log('No more horizontal scroll');
+      clearTimeout(scrollTimeout);
+      setScrollTimeout(null);
+
+      if (scrollOffset === event.deltaX && scrollOffset !== event.deltaY) {
+        event.preventDefault();
+      }
+
       return;
     }
 
     event.preventDefault();
 
     if (!scrollTimeout) {
-      // console.log(`Scrolling ${scrollOffset > 0 ? 'DOWN':'UP'} [Offset: ${currentOffset}]`);
+      // console.log(`Scrolling ${scrollOffset > 0 ? 'DOWN':'UP'} [Offset: ${currentPageIndex}]`);
 
-      if (Math.abs(event.deltaX) >= Math.abs(event.deltaY)) {
-        return;
-      }
       if (scrollOffset < 0) {
-        setCurrentOffset(currentOffset + fullWidth);
+        setCurrentPageIndex(currentPageIndex - 1);
       } else {
-        setCurrentOffset(currentOffset - fullWidth);
+        setCurrentPageIndex(currentPageIndex + 1);
       }
     }
     setScrollTimeout(setTimeout(() => {
@@ -66,8 +59,7 @@ export default function Section({ heading, children, color = 'bg-transparent' })
     }, 50));
   }, [
     children,
-    currentOffset,
-    fullWidth,
+    currentPageIndex,
     scrollTimeout
   ]);
 
@@ -88,24 +80,29 @@ export default function Section({ heading, children, color = 'bg-transparent' })
     }
     
     let scrollOffset = -dy;
+    if (dy === 0 || Math.abs(dx) >= Math.abs(dy)) {
+      scrollOffset = -dx;
+    }
     
     if (
-      (scrollOffset < 0 && currentOffset === 0) ||
-      (scrollOffset > 0 && currentOffset === (Children.count(children) - 1) * (-fullWidth))
+      (scrollOffset < 0 && currentPageIndex === 0) ||
+      (scrollOffset > 0 && currentPageIndex === (Children.count(children) - 1) * (-fullWidth))
     ) {
       console.log('No more horizontal scroll');
+      clearTimeout(scrollTimeout);
+      setScrollTimeout(null);
       return;
     }
 
     event.preventDefault();
 
     if (!scrollTimeout) {
-      console.log(`Scrolling ${scrollOffset > 0 ? 'DOWN':'UP'} [Offset: ${currentOffset}]`);
+      console.log(`Scrolling ${scrollOffset > 0 ? 'DOWN':'UP'} [Offset: ${currentPageIndex}]`);
 
       if (scrollOffset < 0) {
-        setCurrentOffset(currentOffset + fullWidth);
+        setCurrentPageIndex(currentPageIndex - 1);
       } else {
-        setCurrentOffset(currentOffset - fullWidth);
+        setCurrentPageIndex(currentPageIndex + 1);
       }
     }
     setScrollTimeout(setTimeout(() => {
@@ -113,8 +110,7 @@ export default function Section({ heading, children, color = 'bg-transparent' })
     }, 250));
   }, [
     children,
-    currentOffset,
-    fullWidth,
+    currentPageIndex,
     scrollTimeout,
     touchStartX,
     touchStartY
@@ -122,15 +118,12 @@ export default function Section({ heading, children, color = 'bg-transparent' })
 
   useEffect(() => {
     const el = sectionElement.current;
-
-    setFullWidth(el.offsetWidth);
-
+    
     const handleTouchStart = (event) => {
       setTouchStartX(event.touches[0].clientX);
       setTouchStartY(event.touches[0].clientY);
     };
     
-    window.addEventListener('resize', handleResize, false);
     el.addEventListener(
       'wheel',
       handleMouseScroll,
@@ -148,7 +141,6 @@ export default function Section({ heading, children, color = 'bg-transparent' })
     );
 
     return () => {
-      window.removeEventListener('resize', handleResize, false);
       el.removeEventListener(
         'wheel',
         handleMouseScroll,
@@ -165,12 +157,7 @@ export default function Section({ heading, children, color = 'bg-transparent' })
         {capture: false, passive:false}
       );
     };
-  }, [
-    sectionElement,
-    handleResize,
-    handleMouseScroll,
-    handleTouch
-  ]);
+  }, [sectionElement, handleMouseScroll, handleTouch]);
   
   return (
     <div ref={sectionElement} className={`flex flex-col w-screen h-screen snap-always snap-start ${color}`}>
@@ -181,7 +168,7 @@ export default function Section({ heading, children, color = 'bg-transparent' })
         </div>
       }
       <div className="grow">
-        <Carousel offset={currentOffset}>{children}</Carousel>
+        <Carousel offset={currentPageIndex * -sectionWidth}>{children}</Carousel>
       </div>
     </div>
   );
