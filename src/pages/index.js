@@ -126,7 +126,7 @@ export default function Home() {
           content="https://opengraphweb.s3.amazonaws.com/og-home%401x.png"
         /> */}
       </Head>
-      <div className="flex h-screen overflow-y-scroll snap-mandatory snap-y supports-[height:100svh]:min-h-[100svh] flex-col items-center justify-between">
+      <div className="flex h-screen overflow-y-scroll snap-mandatory snap-y supports-[height:100dvh]:min-h-[100dvh] flex-col items-center justify-between">
         <Hero primaryScrollActionRef={primaryScrollActionRef} secondaryScrollActionRef={secondaryScrollActionRef} />
         <div ref={secondaryScrollActionRef}>
           <Section color='bg-trusty-200'>
@@ -156,8 +156,9 @@ export default function Home() {
             </div>
           </Section>
         </div>
+        <div>
         <Section color='bg-trusty-100'>
-          <div id='after-hero' className='mx-auto h-full container pt-8 pb-14 px-4 flex flex-col justify-between'>
+          <div className='mx-auto h-full container pt-8 pb-14 px-4 flex flex-col justify-between'>
             <h2 className='text-trusty-500'>driven by intuition...</h2>
             <ul className='h-full flex flex-col justify-center items-center'>
               <li className='my-3'><p className='text-trusty-400 text-center text-1'>Your highest goals</p></li>
@@ -178,6 +179,8 @@ export default function Home() {
             </div>
           </div>
         </Section>
+        </div>
+        <div>
         <Section heading="the nuron way..." color='bg-trusty-200 text-center'>
           {
             usp.map((item, index) => (
@@ -185,6 +188,7 @@ export default function Home() {
             ))
           }
         </Section>
+        </div>
         {/* <Section>
           <div className='mx-auto h-full px-4 container'>
             <h2 className='text-trusty-100 mt-10'>a brighter future awaits...</h2>
@@ -211,6 +215,7 @@ export default function Home() {
             </div>
           </div>
         </Section> */}
+        <div>
         <Section color='bg-trusty-300'>
           <div className='px-4 container h-full mx-auto flex flex-col'>
             <p className='text-4 sm:text-3 !font-medium text-trusty-400 mt-8'>{"A fusion of science, technology and personal journeys..."}</p>
@@ -229,6 +234,7 @@ export default function Home() {
             </div>
           </div>
         </Section>
+        </div>
         <div id='pricing' ref={primaryScrollActionRef} className='snap-proximity snap-start w-screen py-8 bg-trusty-100'>
           <div className='container mx-auto flex flex-col'>
             <h2 className='text-trusty-500 mb-8 px-4'>the early bird...</h2>
@@ -291,6 +297,7 @@ export default function Home() {
             </form>
           </div>
         </div> */}
+        <div>
         <Section>
           {
             quotes.map((quote, index) => (
@@ -298,6 +305,7 @@ export default function Home() {
             ))
           }
         </Section>
+        </div>
         <div>
           <p className='w-screen text-center text-5 text-serenity py-8'>Copyright &copy; 2023</p>
         </div>
