@@ -126,7 +126,7 @@ export default function Home() {
           content="https://opengraphweb.s3.amazonaws.com/og-home%401x.png"
         /> */}
       </Head>
-      <div className="flex h-screen overflow-y-scroll snap-mandatory snap-y supports-[height:100cqh]:min-h-[100cqh] supports-[height:100svh]:min-h-[100svh] flex-col items-center justify-between">
+      <div className="flex h-screen overflow-y-scroll snap-mandatory snap-y supports-[height:100svh]:min-h-[100svh] flex-col items-center justify-between">
         <Hero primaryScrollActionRef={primaryScrollActionRef} secondaryScrollActionRef={secondaryScrollActionRef} />
         <div ref={secondaryScrollActionRef}>
           <Section color='bg-trusty-200'>
