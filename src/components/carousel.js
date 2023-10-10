@@ -7,7 +7,7 @@ export default function Carousel({ children, offset }) {
   return (
     <div className="w-screen h-full overflow-hidden">
       <div
-        className="flex flex-nowrap flex-row h-full transition-all ease-in-out duration-[640ms]"
+        className="flex flex-nowrap flex-row h-full transition-all ease-in-out duration-[500ms]"
         style={{ transform: `translateX(${offset}px)` }}
       >
       {

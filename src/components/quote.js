@@ -1,11 +1,10 @@
+import Image from "next/image";
 
 export default function Quote({ quote }) {
   return (
-    <div
-      className="bg-cover bg-center w-screen h-full"
-      style={{ backgroundImage: `url('/${quote.image}')` }}
-    >
-      <div className="w-full h-full bg-trusty-500 bg-opacity-70 backdrop-blur-md">
+    <div className="w-screen h-full relative">
+      <Image className="z-0 w-full h-full relative" src={'/' + quote.image + '.webp'} alt={quote.alt} style={{objectFit: "cover", objectPosition: "center middle"}} fill />
+      <div className="z-10 w-full h-full bg-trusty-500 bg-opacity-70 backdrop-blur-md">
         <div className="mx-auto h-full container flex flex-col justify-evenly">
           <h4 className="text-serenity text-center leading-relaxed px-4">{quote.title}</h4>
           <div>

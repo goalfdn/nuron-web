@@ -20,26 +20,26 @@ export default function Hero({ primaryScrollActionRef, secondaryScrollActionRef 
       <div className='flex flex-1'>
         {
           sectionWidth > 0 && sectionWidth >= 1024 &&
-          <ImageContainer src='/hero.png' alt='various screens of app shown on iPhone, iPad and laptop' />
+          <ImageContainer src='/hero.webp' alt='various screens of app shown on iPhone, iPad and laptop' />
         }
         {
           sectionWidth > 0 && sectionWidth < 1024 &&
-          <ImageContainer src='/hero-narrow.png' alt='various screens of app shown on iPhone, iPad and laptop' />
+          <ImageContainer src='/hero-narrow.webp' alt='various screens of app shown on iPhone, iPad and laptop' />
         }
       </div>
       <div className="flex flex-row my-4 space-x-8 justify-center items-center align-middle">
         <button
-          className="text-5 pt-1 pb-2 px-7 rounded-md bg-trusty-100 hover:cursor-pointer hover:bg-serenity text-trusty-500 !font-medium max-w-fit"
+          className="text-5 pt-1 pb-2 px-7 rounded-md bg-trusty-300 hover:cursor-pointer hover:bg-serenity text-trusty-500 !font-medium max-w-fit"
           onClick={() => primaryScrollActionRef.current.scrollIntoView({behavior: 'smooth', block: 'start'})}
         >
           {"I'm Ready!"}
         </button>
-        <a
-          className="hover:cursor-pointer hover:text-serenity hover:!font-medium leading-relaxed underline-offset-4 decoration-serenity text-5 text-trusty-100 !font-normal"
+        <span
+          className="hover:cursor-pointer text-trusty-100 hover:text-serenity hover:!font-medium leading-relaxed underline-offset-4 decoration-serenity text-5 !font-normal"
           onClick={() => secondaryScrollActionRef.current.scrollIntoView({behavior: 'smooth', block: 'start'})}
         >
           {"Tell Me More"}
-        </a>
+        </span>
       </div>
       <p className="text-trusty-300 text-center pb-8">{"Founders' Edition available Oct. 23"}</p>
       {/* <div className="flex flex-row justify-center mt-4">
@@ -54,11 +54,11 @@ export default function Hero({ primaryScrollActionRef, secondaryScrollActionRef 
   );
 }
 
-function PlatformButton({ type }) {
-  return (
-    <div
-      className="mx-4 bg-center bg-contain bg-no-repeat aspect-square h-5"
-      style={{ backgroundImage: `url("/${type}.png")` }}
-    />
-  );
-}
+// function PlatformButton({ type }) {
+//   return (
+//     <div
+//       className="mx-4 bg-center bg-contain bg-no-repeat aspect-square h-5"
+//       style={{ backgroundImage: `url("/${type}.png")` }}
+//     />
+//   );
+// }
