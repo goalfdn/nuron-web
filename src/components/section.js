@@ -86,11 +86,12 @@ export default function Section({ heading, children, color = 'bg-transparent' })
     
     if (
       (scrollOffset < 0 && currentPageIndex === 0) ||
-      (scrollOffset > 0 && currentPageIndex === (Children.count(children) - 1) * (-fullWidth))
+      (scrollOffset > 0 && currentPageIndex === Children.count(children) - 1)
     ) {
       console.log('No more horizontal scroll');
       clearTimeout(scrollTimeout);
       setScrollTimeout(null);
+      event.stopImmediatePropagation();
       return;
     }
 
@@ -160,7 +161,7 @@ export default function Section({ heading, children, color = 'bg-transparent' })
   }, [sectionElement, handleMouseScroll, handleTouch]);
   
   return (
-    <div ref={sectionElement} className={`flex flex-col w-screen h-screen snap-always snap-start ${color}`}>
+    <div ref={sectionElement} className={`flex flex-col w-screen h-screen supports-[height:100cqh]:h-[100cqh] supports-[height:100svh]:h-[100svh] snap-always snap-start ${color}`}>
       {
         (!!heading) &&
         <div className="container mx-auto mt-8 mb-4 px-4">

@@ -15,22 +15,23 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
-} */
-
-html {
-  scroll-snap-type: y mandatory;
 }
 
 @supports (-webkit-touch-callout: none) {
-  .h-screen {
-    height: -webkit-fill-available;
-  }
-}
+  
+} */
+/* 
+html {
+  @apply snap-mandatory;
+  @apply snap-y;
+} */
 
 body {
   @apply font-sans;
   @apply text-text-black;
   @apply bg-trusty-500;
+
+  
 }
 
 h1, h2, h3, h4 {

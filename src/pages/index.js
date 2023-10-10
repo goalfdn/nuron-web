@@ -10,7 +10,7 @@ const usp = [
   {
     us: "Choose your adventure.",
     and: "No one knows you better than you! Explore different routes, and we'll illuminate their effectiveness for you.",
-    them: "Stick to our method for success. We're the experts, trust our research over researched methods!"
+    them: "Stick to our method for success. We're the experts, trust our research over other researched methods!"
   },
   {
     us: "Your well-being, your rules.",
@@ -106,32 +106,58 @@ export default function Home() {
   const secondaryScrollActionRef = useRef();
   
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between p-24">
+    <div className="flex h-screen overflow-y-scroll snap-mandatory snap-y supports-[height:100cqh]:min-h-[100cqh] supports-[height:100svh]:min-h-[100svh] flex-col items-center justify-between">
       <Hero primaryScrollActionRef={primaryScrollActionRef} secondaryScrollActionRef={secondaryScrollActionRef} />
-      <div ref={primaryScrollActionRef}>
-        <Section color='bg-trusty-100'>
+      <div ref={secondaryScrollActionRef}>
+        <Section color='bg-trusty-200'>
           <div id='after-hero' className='mx-auto h-full container pt-8 pb-14 px-4 flex flex-col justify-between'>
-            <h2 className='text-trusty-500'>driven by intuition...</h2>
-            <ul className='h-full flex flex-col justify-center items-center'>
-              <li className='my-3'><p className='text-trusty-400 text-center text-1'>Your highest goals</p></li>
-              <li className='my-3'><p className='text-trusty-400 text-center text-2'>Your greatest values</p></li>
-              <li className='my-3'><p className='text-trusty-400 text-center text-3'>Your deepest thoughts</p></li>
-              <li className='my-3'><p className='text-trusty-400 text-center text-4'>Your strongest emotions</p></li>
-            </ul>
+            <h2 className='text-trusty-500'>stack achievements...</h2>
+            <div>
+              <p className='text-trusty-500 !font-light text-2 text-left md:text-center'>{"Your outcomes are beyond your control."}</p>
+              <p className='text-trusty-400 !font-medium text-1 text-right md:text-center pt-3'>{"Your efforts aren't."}</p>
+            </div>
+            <div>
+              <p className='text-text-black !font-bold pb-1 text-left text-5'>{'Work smarter, win quicker.'}</p>
+              <p className='text-text-black text-left text-5'>{'Gain crystal-clear insights into how efficiently your daily actions drive your progress towards your goals.'}</p>
+            </div>
           </div>
           <div className='w-screen h-full bg-trusty-400'>
             <div className='mx-auto h-full container pt-8 pb-14 px-4 flex flex-col justify-between'>
-              <h2 className='text-right text-trusty-100'>...backed by evidence</h2>
-              <ul className='h-full flex flex-col justify-center items-center'>
-                <li className='my-3'><p className='text-trusty-200 text-center text-4'>MCII for Goal Achievement</p></li>
-                <li className='my-3'><p className='text-trusty-200 text-center text-3'>DSM-5 Self-Reporting Measures</p></li>
-                <li className='my-3'><p className='text-trusty-200 text-center text-2'>Schwartz&apos;s Theory of Basic Human Values</p></li>
-                <li className='my-3'><p className='text-trusty-200 text-center text-1'>Leading Cognitive-Behavioral Principles</p></li>
-              </ul>
+              <h2 className='text-trusty-100 text-right'>...hack fulfillment</h2>
+            <div>
+              <p className='text-trusty-300 !font-light text-2 text-left md:text-center'>{"Your emotions are beyond your control."}</p>
+              <p className='text-trusty-100 !font-medium text-1 text-right md:text-center pt-3'>{"Your mindset isn't."}</p>
+            </div>
+            <div>
+              <p className='text-trusty-200 !font-bold pb-1 text-left text-5'>{'Think brighter, feel better.'}</p>
+              <p className='text-trusty-200 text-left text-5'>{'Discover effective strategies to reshape your thinking and proactively act toward a happier, more positive mindset.'}</p>
+            </div>
             </div>
           </div>
         </Section>
       </div>
+      <Section color='bg-trusty-100'>
+        <div id='after-hero' className='mx-auto h-full container pt-8 pb-14 px-4 flex flex-col justify-between'>
+          <h2 className='text-trusty-500'>driven by intuition...</h2>
+          <ul className='h-full flex flex-col justify-center items-center'>
+            <li className='my-3'><p className='text-trusty-400 text-center text-1'>Your highest goals</p></li>
+            <li className='my-3'><p className='text-trusty-400 text-center text-2'>Your greatest values</p></li>
+            <li className='my-3'><p className='text-trusty-400 text-center text-3'>Your deepest thoughts</p></li>
+            <li className='my-3'><p className='text-trusty-400 text-center text-4'>Your strongest emotions</p></li>
+          </ul>
+        </div>
+        <div className='w-screen h-full bg-trusty-400'>
+          <div className='mx-auto h-full container pt-8 pb-14 px-4 flex flex-col justify-between'>
+            <h2 className='text-right text-trusty-100'>...backed by evidence</h2>
+            <ul className='h-full flex flex-col justify-center items-center'>
+              <li className='my-3'><p className='text-trusty-200 text-center text-4'>MCII for Goal Achievement</p></li>
+              <li className='my-3'><p className='text-trusty-200 text-center text-3'>DSM-5 Self-Reporting Measures</p></li>
+              <li className='my-3'><p className='text-trusty-200 text-center text-2'>Schwartz&apos;s Theory of Basic Human Values</p></li>
+              <li className='my-3'><p className='text-trusty-200 text-center text-1'>Leading Cognitive-Behavioral Principles</p></li>
+            </ul>
+          </div>
+        </div>
+      </Section>
       <Section heading="the nuron way..." color='bg-trusty-200 text-center'>
         {
           usp.map((item, index) => (
@@ -183,7 +209,7 @@ export default function Home() {
           </div>
         </div>
       </Section>
-      <div id='pricing' ref={secondaryScrollActionRef} className='snap-proximity snap-start w-screen py-8 bg-trusty-100'>
+      <div id='pricing' ref={primaryScrollActionRef} className='snap-proximity snap-start w-screen py-8 bg-trusty-100'>
         <div className='container mx-auto flex flex-col'>
           <h2 className='text-trusty-500 mb-8 px-4'>the early bird...</h2>
           <div className='snap-start snap-proximity flex flex-row flex-wrap-reverse md:flex-wrap'>
@@ -252,6 +278,9 @@ export default function Home() {
           ))
         }
       </Section>
+      <div>
+        <p className='w-screen text-center text-5 text-serenity py-8'>Copyright &copy; 2023</p>
+      </div>
     </div>
   )
 }
