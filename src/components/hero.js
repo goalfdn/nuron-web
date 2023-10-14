@@ -29,7 +29,7 @@ export default function Hero({ primaryScrollActionRef, secondaryScrollActionRef 
       </div>
       <div className="flex flex-row my-4 space-x-8 justify-center items-center align-middle">
         <button
-          className="text-5 pt-1 pb-2 px-7 rounded-md bg-trusty-300 hover:cursor-pointer hover:bg-serenity text-trusty-500 !font-medium max-w-fit"
+          className="text-5 pt-1 pb-2 px-7 rounded-md bg-trusty-200 hover:cursor-pointer hover:bg-serenity text-trusty-500 !font-medium max-w-fit"
           onClick={() => primaryScrollActionRef.current.scrollIntoView({behavior: 'smooth', block: 'start'})}
         >
           {"I'm Ready!"}
@@ -41,7 +41,7 @@ export default function Hero({ primaryScrollActionRef, secondaryScrollActionRef 
           {"Tell Me More"}
         </span>
       </div>
-      <p className="text-trusty-300 text-center pb-8">{"Founders' Edition available Oct. 23"}</p>
+      <p className="text-trusty-200 text-center pb-8">{"Founders' Edition available Oct. 23"}</p>
       {/* <div className="flex flex-row justify-center mt-4">
         <PlatformButton type="apple" />
         <PlatformButton type="android" />

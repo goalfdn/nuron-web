@@ -18,11 +18,12 @@ module.exports = {
         'checked-box': "url('/checked-box.svg')"
       },
       colors: {
-        'trusty-100': '#D5E6E3',
-        'trusty-200': '#C9E3DE',
-        'trusty-300': '#9ED1C8',
-        'trusty-400': '#0F7B69',
-        'trusty-500': '#083D34',
+        'trusty-50': '#D5E6E3',
+        'trusty-100': '#C9E3DE',
+        'trusty-200': '#9ED1C8',
+        'trusty-300': '#0C8074',
+        'trusty-400': '#083D34',
+        'trusty-500': '#02231E',
         'text-black': '#090909',
         'serenity': '#CFB41B'
       },

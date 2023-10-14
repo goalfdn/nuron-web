@@ -10,7 +10,7 @@ export default function Quote({ quote }) {
           <div>
             {
               quote.author.split('\n').map((line, index) => (
-                <p key={index} className={`text-right px-4 text-5 ${index === 0 ? 'text-trusty-100' : 'text-trusty-300'}`}>
+                <p key={index} className={`text-right px-4 text-5 ${index === 0 ? 'text-trusty-50' : 'text-trusty-200'}`}>
                   {`${index === 0 ? '— ' : ''}${line}`}
                 </p>
               ))
