@@ -263,9 +263,25 @@ export default function Home() {
                         </p>
                         <p className='text-1 text-trusty-400 text-center mb-7'>{section.price}</p>
                       </div>
-                      <button className={`w-full rounded-md px-4 pt-2 pb-3 mb-8 text-5 bg-trusty-400 text-trusty-100`}>
-                        {section.action}
-                      </button>
+                      {
+                          section.action === "Secure Your Spot" ?
+                          <a href="https://www.zeffy.com/en-US/ticketing/495a7967-462e-456a-bbdf-d5b1215eb306">
+                              <button className="w-full rounded-md px-4 pt-2 pb-3 mb-8 text-5 bg-trusty-400 text-trusty-100">
+                                  {section.action}
+                              </button>
+                          </a>
+                          :
+                          section.action === "Download Now" ?
+                          <a href="https://www.zeffy.com/en-US/ticketing/1c84d313-fe17-4047-95cd-9a2c2522ec8f">
+                              <button className="w-full rounded-md px-4 pt-2 pb-3 mb-8 text-5 bg-trusty-400 text-trusty-100">
+                                  {section.action}
+                              </button>
+                          </a>
+                          :
+                          <button className="w-full rounded-md px-4 pt-2 pb-3 mb-8 text-5 bg-trusty-400 text-trusty-100">
+                              {section.action}
+                          </button>
+                      }
                       <ul>
                       {
                         section.features.map((feature, fIndex) => (
