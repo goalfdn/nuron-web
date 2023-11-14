@@ -26,6 +26,40 @@ html {
   @apply snap-y;
 } */
 
+@keyframes textAppear {
+  0% { width: 0%; }
+  20% { width: 100%; }
+  80% { width: 100%; }
+  100% { width: 0%; }
+}
+
+.textAppear {
+  animation: textAppear 2.5s ease-in-out 0s 1;
+  text-overflow: clip;
+  white-space: nowrap;
+  overflow-x: hidden;
+  padding-bottom: 8px;
+}
+
+.fullScreenSection {
+  @apply w-screen;
+  @apply h-screen;
+  @apply supports-[height:100dvh]:h-[100dvh];
+  @apply snap-always;
+  @apply snap-start;
+}
+
+.fullScreenSubSectionWrapper {
+  @apply flex;
+  @apply flex-col;
+  @apply w-screen;
+  @apply h-screen;
+  @apply supports-[height:100dvh]:h-[100dvh];
+  @apply overflow-auto;
+  @apply snap-mandatory;
+  @apply snap-y;
+}
+
 body {
   @apply font-sans;
   @apply text-text-black;

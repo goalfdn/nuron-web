@@ -8,7 +8,8 @@ module.exports = {
   theme: {
     fontFamily: {
       'serif': ['var(--font-alice)', 'serif'],
-      'sans': ['var(--font-zen)', 'sans-serif']
+      'sans': ['var(--font-zen)', 'sans-serif'],
+      'emoji': ['var(--font-noto)']
     },
     extend: {
       backgroundImage: {

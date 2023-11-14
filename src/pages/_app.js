@@ -7,6 +7,11 @@ const titleFont = localFont({
   variable: '--font-alice'
 });
 
+const emojiFont = localFont({
+  src: '../fonts/NotoColorEmoji.ttf',
+  variable: '--font-noto'
+});
+
 const bodyFont = Zen_Maru_Gothic({
   subsets: ['latin', 'latin-ext'],
   weight: ['300', '400', '500', '700', '900'],
@@ -15,7 +20,7 @@ const bodyFont = Zen_Maru_Gothic({
  
 export default function MyApp({ Component, pageProps }) {
   return (
-    <main className={`${titleFont.variable} ${bodyFont.variable} ${bodyFont.className}`}>
+    <main className={`${titleFont.variable} ${emojiFont.variable} ${bodyFont.variable} ${bodyFont.className}`}>
       <Component {...pageProps} />
     </main>
   );

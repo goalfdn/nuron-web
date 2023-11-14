@@ -4,117 +4,31 @@ import Hero from '@/components/hero';
 import Section from '@/components/section';
 import Quote from '@/components/quote';
 import USP from '@/components/usp';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 
-const usp = [
-  {
-    us: "Choose your adventure.",
-    and: "No one knows you better than you! Explore different routes, and we'll illuminate their effectiveness for you.",
-    them: "Stick to our method for success. We're the experts, trust our research over other researched methods!"
-  },
-  {
-    us: "Your well-being, your rules.",
-    and: "Take the wheel, no cookie-cutter fixes here! Explore options as you please, and we'll empower you to spot even the tiniest shifts early on— so you can level up your decisions like a true pro!",
-    them: "Follow our rules, and we promise happiness. We're the experts, trust us!"
-  },
-  {
-    us: "Crafted your plan? Fantastic!",
-    and: "Let's anticipate challenges and equip you for success. Unexpected hurdle? We've got your back with gentle nudges and proven techniques to conquer it. Stuck? Let's explore a new strategy together. Feeling lost? We've got a treasure trove of ideas waiting for you!",
-    them: "Do as we say, follow our steps, and success is guaranteed. Trust us, if it's not working, that's on you! We've got the proven formula."
-  }
-];
-
-const quotes = [
-  {
-    title: "“Watch your thoughts, they become your words; watch your words, they become your actions; watch your actions, they become your habits; watch your habits, they become your character; watch your character, it becomes your destiny.”",
-    author: "Lao Tzu (6th Century B.C.)\n— Mahatma Gandhi (18th Century)",
-    image: "tzu"
-  },
-  {
-    title: "“Human behavior flows from three main sources: desire, emotion, and knowledge.”",
-    author: "Plato (3rd Century B.C)\nCentral figure in history of Philosophy",
-    image: "plato"
-  },
-  {
-    title: "“What is necessary to change a person is to change his awareness of himself.”",
-    author: "Abraham Maslow\nCentral figure in development of Psychology",
-    image: "psych"
-  },
-  {
-    title: "“If everyone could learn that what is right for me does not make it right for anyone else, the world would be a much happier place.”",
-    author: "William Glasser\nWorld-renowned psychiatrist & author",
-    image: "neuronbg"
-  },
-  {
-    title: "“Life is hard. Life is difficult. Life is going to punch you in the gut. But when you change your attitude, you change your behavior. When your behavior changes, so do your results.”",
-    author: "Will Hurd\nEx-C.I.A. & U.S. 2024 Presidential Candidate",
-    image: "cia"
-  },
-  {
-    title: "“It's not hard to make decisions once you know what your values are.”",
-    author: "Roy E. Disney\nCreator of Walt Disney",
-    image: "imagination"
-  },
-  {
-    title: "“Success is not the key to happiness. Happiness is the key to success.”",
-    author: "Albert Schweitzer\ntheologian, organist, musicologist, writer, humanitarian, philosopher, physician\n...and Nobel Peace prize winner",
-    image: "keys"
-  },
-  {
-    title: "“We can't control the wind, but we can always adjust the sails.”",
-    author: "Panda Express\nfortune cookie",
-    image: "panda"
-  }
-];
-
-const core_features = [
-  'Pursue as many high-level goals as you desire',
-  'Measure and visualize your progress with endless personalized metrics',
-  'Uncover meaningful connections between your actions, emotions and outcomes',
-  '24x7 Chat with A.I.D.E.N– your personalized, AI-powered coach',
-  'Comprehensive health and emotion tracking',
-  'Efficient task and habit management',
-  'Integrated journaling to reflect on your journey'
-];
-
-const pricing = [
-  {
-    title: "Pre-release Trial",
-    description: "limitless tools for personal growth",
-    value: "$63",
-    price: "FREE",
-    action: "Secure Your Spot",
-    features: [
-      'Unrestricted access to all features for one month after public release',
-      'Extend your access for free by referring friends (up to three months!)',
-      'Gift up to three friends with a one-month all-access pass',
-      'Enjoy continued access to free version forever'
-    ]
-  },
-  {
-    title: "Founders' Edition",
-    description: "rewrite *our story* as we grow together",
-    value: "$108",
-    price: "$25",
-    action: "Download Now",
-    features: [
-      'Unrestricted access to all features for one year after public release',
-      'Get a sneak peek with our preview version and propose customizations',
-      'Tailor our tools to align perfectly with your preferences',
-      "We'll make adjustments to fit your needs before the official launch"
-    ]
-  }
-];
+import { core_features, designed_for, quotes, usp } from '@/app/constants';
+import ImageContainer from '@/components/image-container';
+import ChapterWall from '@/components/chapter-wall';
+// import ImageContainer from '@/components/image-container';
 
 export default function Home() {
   const primaryScrollActionRef = useRef();
   const secondaryScrollActionRef = useRef();
+
+  const [designedForIndex, setDesignedForIndex] = useState(0);
+
+  useEffect(() => {
+    let interval = setInterval(() => setDesignedForIndex((designedForIndex + 1) % designed_for.length), 2500);
+
+    return () => clearInterval(interval);
+  }, [designedForIndex]);
   
   return (
     <>
       <Head>
         <title>nuron</title>
+        <meta charSet='UTF-8' />
         <meta name="description" content="rewrite your story" key="desc" />
         <meta property="og:title" content="Feel better. Win quicker. Harness the power of Nuron." />
         <meta
@@ -128,36 +42,106 @@ export default function Home() {
       </Head>
       <div className="flex h-screen overflow-y-scroll snap-mandatory snap-y supports-[height:100dvh]:min-h-[100dvh] flex-col items-center justify-between">
         <Hero primaryScrollActionRef={primaryScrollActionRef} secondaryScrollActionRef={secondaryScrollActionRef} />
-        <div ref={secondaryScrollActionRef}>
-          <Section color='bg-trusty-50'>
-            <div id='after-hero' className='mx-auto h-full container pt-8 pb-14 px-4 flex flex-col justify-between'>
-              <h2 className='text-trusty-500'>stack achievements...</h2>
-              <div>
-                <p className='text-trusty-500 !font-light text-2 text-left md:text-center'>{"Your outcomes are beyond your control."}</p>
-                <p className='text-trusty-400 !font-medium text-1 text-right md:text-center pt-3'>{"Your efforts aren't."}</p>
+        <div id='after-hero' ref={secondaryScrollActionRef} className='fullScreenSection flex flex-col bg-trusty-50'>
+          <div className='mx-auto h-screen container pt-8 pb-14 px-4 flex flex-col'>
+            <div>
+              <h3>the next step in app evolution</h3>
+              <h2 className='pt-1'>is a self-empowerment revolution.</h2>
+            </div>
+            <div className='flex flex-1 flex-col md:flex-row'>
+              <div className='md:flex-1 md:flex md:flex-col md:items-center'>
+                <div className='mt-4 mb-8 md:my-auto'>
+                  <p className='text-5 pb-4 md:pr-4'>
+                    {'We live in an era where technology can be used to track all aspects of our lives.'}
+                  </p>
+                  <p className='text-5 md:pt-4'>
+                    {'What if we could use this data to monitor our health, wealth and happiness, then leverage the power of science and technology to live our best lives?'}
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className='text-text-black !font-bold pb-1 text-left text-5'>{'Work smarter, win quicker.'}</p>
-                <p className='text-text-black text-left text-5'>{'Gain crystal-clear insights into how efficiently your daily actions drive your progress towards your goals.'}</p>
+              <div className='flex md:flex-1 grow'>
+                <ImageContainer src='/spiral-of-success.webp' alt='upward spiral shows how guided action, measured results and a transformed mindset create a positive cycle of self-empowerment' />
               </div>
             </div>
-            <div className='w-screen h-full bg-trusty-400'>
-              <div className='mx-auto h-full container pt-8 pb-14 px-4 flex flex-col justify-between'>
-                <h2 className='text-trusty-50 text-right'>...hack fulfillment</h2>
-              <div>
-                <p className='text-trusty-200 !font-light text-2 text-left md:text-center'>{"Your emotions are beyond your control."}</p>
-                <p className='text-trusty-100 !font-medium text-1 text-right md:text-center pt-3'>{"Your mindset isn't."}</p>
-              </div>
-              <div>
-                <p className='text-trusty-50 !font-bold pb-1 text-left text-5'>{'Think brighter, feel better.'}</p>
-                <p className='text-trusty-50 text-left text-5'>{'Discover effective strategies to reshape your thinking and proactively act toward a happier, more positive mindset.'}</p>
-              </div>
-              </div>
-            </div>
-          </Section>
+          </div>
         </div>
-        <div>
-        <Section color='bg-trusty-100'>
+        {/* <div className='fullScreenSection flex flex-col bg-trusty-50'>
+          <div className='mx-auto h-full container pt-8 pb-14 px-4 flex flex-col justify-between items-start'>
+            <div>
+              <h3>envision the big picture</h3>
+              <h2 className='pt-1'>live in the now.</h2>
+            </div>
+            <div>
+              <p className='text-5 pb-4'>
+                {'Write the chapters of your story, keep your targets in sight and reflect on your journey.'}
+              </p>
+              <p className='text-5 pb-4'>
+                {'Then, focus on your actions, results, feelings and thoughts in the moment.'}
+              </p>
+              <p className='text-5'>
+                {"Let Nuron make sense of it all and show you how the bigger picture evolves– so you never lose track of what's important."}
+              </p>
+            </div>
+          </div>
+        </div> */}
+        <div className='fullScreenSection flex flex-col bg-trusty-100'>
+          <div className='h-screen flex flex-col justify-between items-start'>
+            <div className='mx-auto container pt-8 pb-14 px-4'>
+              <h3>designed for</h3>
+              {
+                designedForIndex >= 0 &&
+                <div className='inline'><div key={designedForIndex} className='textAppear w-0'><h2>{designed_for[designedForIndex]}</h2></div></div>
+              }
+            </div>
+            <div className='w-screen overflow-x-hidden'>
+              <ChapterWall />
+            </div>
+            <div className='mx-auto container pt-8 pb-14 px-4'>
+              <p className='text-5 pb-4'>{"Nuron is your gateway to unleashing the collective potential of advanced AI, statistics, and psychology for transformative change."}</p>
+              <p className='text-5 pb-4'>{"Say goodbye to those persistent, stubborn areas in your life where you've been craving change. It's time to break those distressing patterns and build fulfilling, rewarding ones."}</p>
+              <p className='text-5'>{"Nuron is your companion on this journey, every step of the way."}</p>
+            </div>
+          </div>
+        </div>
+        <div className='fullScreenSection relative bg-trusty-50 text-center'>
+          <div className='sticky h-screen bg-trusty-50'><div className='mx-auto py-8 w-full bg-trusty-50 z-20'><h2>the nuron way</h2></div></div>
+          <div className='fullScreenSubSectionWrapper absolute top-0 bottom-0 left-0 right-0 z-10'>
+          {
+            usp.map((item, index) => (
+              <USP key={index} usp={item} />
+            ))
+          }
+          </div>
+        </div>
+        {/* <div className='fullScreenSection flex flex-col bg-trusty-100'>
+          <div className='mx-auto h-full container pt-8 pb-14 px-4 flex flex-col justify-between'>
+            <h2 className='text-trusty-500'>stack achievements...</h2>
+            <div>
+              <p className='text-trusty-500 !font-light text-2 text-left md:text-center'>{"Your outcomes are beyond your control."}</p>
+              <p className='text-trusty-400 !font-medium text-1 text-right md:text-center pt-3'>{"Your efforts aren't."}</p>
+            </div>
+            <div>
+              <p className='text-text-black !font-bold pb-1 text-left text-5'>{'Work smarter, win quicker.'}</p>
+              <p className='text-text-black text-left text-5'>{'Gain crystal-clear insights into how efficiently your daily actions drive your progress towards your goals.'}</p>
+            </div>
+          </div>
+        </div>
+          <Section color='bg-trusty-400'>
+            <div className='mx-auto h-full container pt-8 pb-14 px-4 flex flex-col justify-between'>
+              <h2 className='text-trusty-50 text-right'>...hack fulfillment</h2>
+            <div>
+              <p className='text-trusty-200 !font-light text-2 text-left md:text-center'>{"Your emotions are beyond your control."}</p>
+              <p className='text-trusty-100 !font-medium text-1 text-right md:text-center pt-3'>{"Your mindset isn't."}</p>
+            </div>
+            <div>
+              <p className='text-trusty-50 !font-bold pb-1 text-left text-5'>{'Think brighter, feel better.'}</p>
+              <p className='text-trusty-50 text-left text-5'>{'Discover effective strategies to reshape your thinking and proactively act toward a happier, more positive mindset.'}</p>
+            </div>
+            </div>
+          </Section> */}
+        {/* </div>
+        <div> */}
+        {/* <Section color='bg-trusty-100'>
           <div className='mx-auto h-full container pt-8 pb-14 px-4 flex flex-col justify-between'>
             <h2 className='text-trusty-500'>driven by intuition...</h2>
             <ul className='h-full flex flex-col justify-center items-center'>
@@ -178,17 +162,10 @@ export default function Home() {
               </ul>
             </div>
           </div>
-        </Section>
-        </div>
+        </Section> */}
+        {/* </div>
         <div>
-        <Section heading="the nuron way" color='bg-trusty-50 text-center'>
-          {
-            usp.map((item, index) => (
-              <USP key={index} usp={item} />
-            ))
-          }
-        </Section>
-        </div>
+        </div> */}
         {/* <Section>
           <div className='mx-auto h-full px-4 container'>
             <h2 className='text-trusty-100 mt-10'>a brighter future awaits...</h2>
@@ -217,7 +194,7 @@ export default function Home() {
         </Section> */}
         <div>
         <Section color='bg-trusty-200'>
-          <div className='px-4 container h-full mx-auto flex flex-col'>
+          <div ref={primaryScrollActionRef} className='px-4 container h-full mx-auto flex flex-col'>
             <p className='text-4 sm:text-3 !font-medium text-trusty-400 mt-8'>{"A fusion of science, technology and personal journeys..."}</p>
             <p className='text-3 sm:text-2 !font-normal text-trusty-500 text-right py-4'>{"Nuron launches on all major platforms in Spring 2024"}</p>
             <div className='flex flex-1 flex-col justify-center items-center'>
@@ -232,10 +209,21 @@ export default function Home() {
               </ul>
               <p className='text-5 w-full text-right pt-2 sm:pt-4'>...and more</p>
             </div>
+            <div className='flex flex-col items-center justify-center mb-12'>
+              <div>
+                <p className='uppercase !font-black italic mx-2 text-red-700'>Exclusive Access!</p>
+              </div>
+              <a href='https://www.zeffy.com/en-US/ticketing/8b1b7d66-54f1-447d-b916-81f6589be09c'>
+                <div className='my-2 text-5 pt-1 pb-2 px-7 rounded-md bg-trusty-400 hover:cursor-pointer hover:bg-trusty-500 text-trusty-50 !font-medium max-w-fit'>
+                  Download Early Preview
+                </div>
+              </a>
+              <p className=''>Try Risk-Free for 90 days</p>
+            </div>
           </div>
         </Section>
         </div>
-        <div id='pricing' ref={primaryScrollActionRef} className='snap-proximity snap-start w-screen py-8 bg-trusty-50'>
+        {/* <div id='pricing' ref={primaryScrollActionRef} className='snap-proximity snap-start w-screen py-8 bg-trusty-50'>
           <div className='container mx-auto flex flex-col'>
             <h2 className='text-trusty-500 mb-8 px-4'>the early bird...</h2>
             <div className='snap-start snap-proximity flex flex-row flex-wrap-reverse md:flex-wrap'>
@@ -297,7 +285,7 @@ export default function Home() {
               }
             </div>
           </div>
-        </div>
+        </div> */}
         {/* <div className='snap-mandatory snap-start w-screen bg-trusty-200'>
           <div className='px-4 container mx-auto'>
             <h2>in the meantime...</h2>
@@ -313,7 +301,7 @@ export default function Home() {
             </form>
           </div>
         </div> */}
-        <div>
+        {/* <div>
         <Section>
           {
             quotes.map((quote, index) => (
@@ -321,9 +309,13 @@ export default function Home() {
             ))
           }
         </Section>
-        </div>
-        <div>
-          <p className='w-screen text-center text-5 text-serenity py-8'>Copyright &copy; 2023</p>
+        </div> */}
+        <div className='snap-start'>
+          <p className='w-screen text-center text-5 text-serenity py-8'>
+            <span>Copyright &copy; 2023</span>
+            <span>{' • '}</span>
+            <a href='/privacy-policy.pdf' target='_blank' className='hover:underline'>Privacy Policy</a>
+          </p>
         </div>
       </div>
     </>
