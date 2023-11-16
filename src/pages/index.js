@@ -33,12 +33,12 @@ export default function Home() {
         <meta property="og:title" content="Feel better. Win quicker. Harness the power of Nuron." />
         <meta
           property="og:description"
-          content="Nuron is an A.I. powered platform that fuses science, technology and personal experiences to drive lasting behavior change for greater achievement and fulfillment in life."
+          content="Nuron is an A.I. powered platform that drives lasting behavior change using science, technology and personal experiences."
         />
-        {/* <meta
+        <meta
           property="og:image"
-          content="https://opengraphweb.s3.amazonaws.com/og-home%401x.png"
-        /> */}
+          content="https://opengraphweb.s3.amazonaws.com/OG-Graphic.png"
+        />
       </Head>
       <div className="flex h-screen-adaptive overflow-y-scroll snap-mandatory snap-y supports-[height:100dvh]:min-h-[100dvh] flex-col items-center justify-between">
         <Hero primaryScrollActionRef={primaryScrollActionRef} secondaryScrollActionRef={secondaryScrollActionRef} />
