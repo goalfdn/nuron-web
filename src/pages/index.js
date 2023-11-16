@@ -23,6 +23,11 @@ export default function Home() {
 
     return () => clearInterval(interval);
   }, [designedForIndex]);
+
+  const goToPayment = () => {
+    alert("You will be redirected to Zeffy, an online platform for nonprofit donations and sales.\n\nAfter your purchase, you'll get an email with links to install Nuron on all platforms.\n\nTo continue, dismiss this alert.");
+    window.location.href = 'https://www.zeffy.com/en-US/ticketing/8b1b7d66-54f1-447d-b916-81f6589be09c';
+  };
   
   return (
     <>
@@ -213,11 +218,12 @@ export default function Home() {
               <div>
                 <p className='uppercase !font-black italic mx-2 text-red-700'>Exclusive Access!</p>
               </div>
-              <a href='https://www.zeffy.com/en-US/ticketing/8b1b7d66-54f1-447d-b916-81f6589be09c'>
-                <div className='my-2 text-5 pt-1 pb-2 px-7 rounded-md bg-trusty-400 hover:cursor-pointer hover:bg-trusty-500 text-trusty-50 !font-medium max-w-fit'>
-                  Download Early Preview
-                </div>
-              </a>
+              <div
+                className='my-2 text-5 pt-1 pb-2 px-7 rounded-md bg-trusty-400 hover:cursor-pointer hover:bg-trusty-500 text-trusty-50 !font-medium max-w-fit'
+                onClick={goToPayment}
+              >
+                Download Early Preview
+              </div>
               <p className='pt-2'>Try Risk-Free for 90 days</p>
             </div>
           </div>
