@@ -40,13 +40,13 @@ export default function Home() {
           content="https://opengraphweb.s3.amazonaws.com/og-home%401x.png"
         /> */}
       </Head>
-      <div className="flex h-screen overflow-y-scroll snap-mandatory snap-y supports-[height:100dvh]:min-h-[100dvh] flex-col items-center justify-between">
+      <div className="flex h-screen-adaptive overflow-y-scroll snap-mandatory snap-y supports-[height:100dvh]:min-h-[100dvh] flex-col items-center justify-between">
         <Hero primaryScrollActionRef={primaryScrollActionRef} secondaryScrollActionRef={secondaryScrollActionRef} />
         <div id='after-hero' ref={secondaryScrollActionRef} className='fullScreenSection flex flex-col bg-trusty-50'>
-          <div className='mx-auto h-screen container pt-8 pb-14 px-4 flex flex-col'>
+          <div className='mx-auto h-screen-adaptive container pt-8 pb-8 px-4 flex flex-col'>
             <div>
-              <h3>the next step in app evolution</h3>
-              <h2 className='pt-1'>is a self-empowerment revolution.</h2>
+              <h3 className='text-xl md:text-3xl lg:text-4xl'>the next step in app evolution</h3>
+              <h2 className='pt-1 text-2xl md:text-4xl lg:text-5xl'>is a self-empowerment revolution.</h2>
             </div>
             <div className='flex flex-1 flex-col md:flex-row'>
               <div className='md:flex-1 md:flex md:flex-col md:items-center'>
@@ -85,18 +85,18 @@ export default function Home() {
           </div>
         </div> */}
         <div className='fullScreenSection flex flex-col bg-trusty-100'>
-          <div className='h-screen flex flex-col justify-between items-start'>
-            <div className='mx-auto container pt-8 pb-14 px-4'>
+          <div className='h-screen-adaptive flex flex-col justify-between items-start'>
+            <div className='mx-auto container pt-8 pb-4 px-4'>
               <h3>designed for</h3>
               {
                 designedForIndex >= 0 &&
                 <div className='inline'><div key={designedForIndex} className='textAppear w-0'><h2>{designed_for[designedForIndex]}</h2></div></div>
               }
             </div>
-            <div className='w-screen overflow-x-hidden'>
+            <div className='w-screen overflow-hidden flex flex-1'>
               <ChapterWall />
             </div>
-            <div className='mx-auto container pt-8 pb-14 px-4'>
+            <div className='mx-auto container pt-4 pb-8 px-4'>
               <p className='text-5 pb-4'>{"Nuron is your gateway to unleashing the collective potential of advanced AI, statistics, and psychology for transformative change."}</p>
               <p className='text-5 pb-4'>{"Say goodbye to those persistent, stubborn areas in your life where you've been craving change. It's time to break those distressing patterns and build fulfilling, rewarding ones."}</p>
               <p className='text-5'>{"Nuron is your companion on this journey, every step of the way."}</p>
@@ -104,7 +104,7 @@ export default function Home() {
           </div>
         </div>
         <div className='fullScreenSection relative bg-trusty-50 text-center'>
-          <div className='sticky h-screen bg-trusty-50'><div className='mx-auto py-8 w-full bg-trusty-50 z-20'><h2>the nuron way</h2></div></div>
+          <div className='sticky h-screen-adaptive bg-trusty-50'><div className='mx-auto py-8 w-full bg-trusty-50 z-20'><h2>the nuron way</h2></div></div>
           <div className='fullScreenSubSectionWrapper absolute top-0 bottom-0 left-0 right-0 z-10'>
           {
             usp.map((item, index) => (
@@ -209,7 +209,7 @@ export default function Home() {
               </ul>
               <p className='text-5 w-full text-right pt-2 sm:pt-4'>...and more</p>
             </div>
-            <div className='flex flex-col items-center justify-center mb-12'>
+            <div className='flex flex-col items-center justify-center mb-8 mt-2'>
               <div>
                 <p className='uppercase !font-black italic mx-2 text-red-700'>Exclusive Access!</p>
               </div>
@@ -218,7 +218,7 @@ export default function Home() {
                   Download Early Preview
                 </div>
               </a>
-              <p className=''>Try Risk-Free for 90 days</p>
+              <p className='pt-2'>Try Risk-Free for 90 days</p>
             </div>
           </div>
         </Section>

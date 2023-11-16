@@ -161,7 +161,7 @@ export default function Section({ heading, children, color = 'bg-transparent' })
   }, [sectionElement, handleMouseScroll, handleTouch]);
   
   return (
-    <div ref={sectionElement} className={`flex flex-col w-screen h-screen supports-[height:100dvh]:h-[100dvh] snap-always snap-start ${color}`}>
+    <div ref={sectionElement} className={`flex flex-col w-screen h-screen-adaptive supports-[height:100dvh]:h-[100dvh] snap-always snap-start ${color}`}>
       {
         (!!heading) &&
         <div className="container mx-auto mt-8 mb-4 px-4">

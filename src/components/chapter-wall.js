@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export default function ChapterWall() {
 
   return (
-    <div className="overflow-x-visible">
+    <div className="overflow-visible my-auto">
       <ChapterWallRow />
       <ChapterWallRow initialOffset={250} />
       <ChapterWallRow initialOffset={444} />

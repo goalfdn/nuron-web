@@ -60,6 +60,11 @@ html {
   @apply snap-y;
 }
 
+.h-screen-adaptive {
+  @apply h-screen;
+  @apply supports-[height:100dvh]:h-[100dvh];
+}
+
 body {
   @apply font-sans;
   @apply text-text-black;
