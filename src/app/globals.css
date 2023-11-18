@@ -69,8 +69,10 @@ body {
   @apply font-sans;
   @apply text-text-black;
   @apply bg-trusty-500;
+}
 
-  
+li {
+  @apply ml-12 -indent-12 text-5 before:content-[""] before:inline-block before:bg-checked-box before:bg-contain before:bg-no-repeat before:bg-center before:w-[2rem] before:h-[2rem] before:mr-4 before:align-bottom my-2 sm:my-3;
 }
 
 h1, h2, h3, h4 {

@@ -206,7 +206,7 @@ export default function Home() {
               <ul>
                 {
                   core_features.map((feature, index) => (
-                    <li key={`cf-${index}`} className={`ml-12 -indent-12 text-5 before:content-[""] before:inline-block before:bg-checked-box before:bg-contain before:bg-no-repeat before:bg-center before:w-[2rem] before:h-[2rem] before:mr-4 before:align-bottom my-2 sm:my-4 ${index > 3 ? 'hidden sm:block' : ''}`}>
+                    <li key={`cf-${index}`} className={`${index > 3 ? 'hidden sm:block' : ''}`}>
                       {feature}
                     </li>
                   ))
@@ -320,7 +320,7 @@ export default function Home() {
           <p className='w-screen text-center text-5 text-serenity py-8'>
             <span>Copyright &copy; 2023</span>
             <span>{' • '}</span>
-            <a href='/privacy-policy.pdf' target='_blank' className='hover:underline'>Privacy Policy</a>
+            <a href='/privacy' target='_blank' className='hover:underline'>Privacy Policy</a>
           </p>
         </div>
       </div>
