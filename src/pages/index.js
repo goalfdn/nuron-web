@@ -1,4 +1,5 @@
 import Script from "next/script";
+import ReactGA from "react-ga4";
 import { useEffect, useState } from "react";
 
 const positioning = [
@@ -22,7 +23,24 @@ export default function Home() {
   const [positioningIndex, setPositioningIndex] = useState(0);
 
   useEffect(() => {
-    setPositioningIndex(Math.round(Math.random()));
+    const currentIndex = Math.round(Math.random());
+    setPositioningIndex(currentIndex);
+
+    if (typeof window !== "undefined") {
+      ReactGA.initialize("G-16NFZ82FW7"); 
+      ReactGA.send({
+        hitType: "pageview",
+        page: `/path-option-${currentIndex + 1}`,
+        title: "Page View For Position"
+      });
+      ReactGA.event({
+        category: "Positioning",
+        action: "Show",
+        label: `Positioning Option ${currentIndex + 1}`,
+        value: currentIndex, 
+        nonInteraction: true,
+      });
+    }
   }, []);
 
   const makeGoldAndBold = (text) =>
@@ -41,6 +59,19 @@ export default function Home() {
   
   return (
     <>
+    <Script 
+        src="https://www.googletagmanager.com/gtag/js?id=G-16NFZ82FW7" 
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-16NFZ82FW7');
+        `}
+      </Script>
       {/* Hotjar Tracking Code for https://www.thenuronway.com */}
       <Script id='hotjar'>
       {`
