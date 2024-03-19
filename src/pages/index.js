@@ -46,18 +46,12 @@ export default function Home({ positioningIndex, hapiKey, gaKey }) {
       // submit email to hubspot
       
       try {
-        await fetch('/notify', {
+        await fetch('/api/notify', {
           method: 'POST',
-          body: JSON.stringify({
-            "properties": {
-              "email": email,
-              "website": `trynuron.com/${positioningIndex === 0 ? 'a' : 'b'}`
-            }
-          }),
+          body: JSON.stringify({ email, hapiKey, positioningIndex }),
           headers: new Headers({
             "Content-Type": "application/json",
-            "Accept": "application/json",
-            "Authorization": `Bearer ${hapiKey}`
+            "Accept": "application/json"
           })
         });
         setSubmittedEmail(true);

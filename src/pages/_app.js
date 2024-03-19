@@ -18,11 +18,9 @@ const emojiFont = localFont({
 });
 
 const bodyFont = Zen_Maru_Gothic({
-  subsets: ['latin', 'latin-ext'],
+  subsets: ['latin'],
   weight: ['300', '400', '500', '700', '900'],
-  variable: '--font-zen',
-  fallback: [],
-  adjustFontFallback: false
+  variable: '--font-zen'
 });
  
 export default function MyApp({ Component, pageProps }) {
