@@ -76,7 +76,7 @@ li {
 }
 
 h1, h2, h3, h4 {
-  @apply font-serif;
+  @apply font-display;
 }
 
 h1 {
@@ -113,8 +113,14 @@ h5 {
   @apply lg:text-3xl;
 }
 
+.gold-and-bold {
+  @apply font-bold;
+  @apply text-serenity;
+}
+
 .text-1, .text-2, .text-3, .text-4, .text-5 {
   @apply font-sans;
+  @apply text-trusty-50;
 }
 
 .text-1 {

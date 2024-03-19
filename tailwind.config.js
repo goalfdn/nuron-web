@@ -9,14 +9,17 @@ module.exports = {
     fontFamily: {
       'serif': ['var(--font-alice)', 'serif'],
       'sans': ['var(--font-zen)', 'sans-serif'],
-      'emoji': ['var(--font-noto)']
+      'emoji': ['var(--font-noto)'],
+      'display': ['var(--font-ta)', 'sans-serif']
     },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'checked-box': "url('/checked-box.svg')"
+        'checked-box': "url('/checked-box.svg')",
+        'wp-a': "url('/bg1.png')",
+        'wp-b': "url('/bg2.png')"
       },
       colors: {
         'trusty-50': '#D5E6E3',
@@ -26,7 +29,7 @@ module.exports = {
         'trusty-400': '#083D34',
         'trusty-500': '#02231E',
         'text-black': '#090909',
-        'serenity': '#CFB41B'
+        'serenity': '#DAA520'
       },
       container: {
         screens: {
