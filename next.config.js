@@ -4,7 +4,7 @@ const nextConfig = {
     async rewrites() {
         return [
             {
-                source: '/api/:path*',
+                source: '/notify',
                 destination: 'https://api.hubapi.com/crm/v3/objects/contacts',
             },
         ]

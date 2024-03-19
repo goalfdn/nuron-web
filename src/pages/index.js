@@ -46,7 +46,7 @@ export default function Home({ positioningIndex, hapiKey, gaKey }) {
       // submit email to hubspot
       
       try {
-        await fetch('/api/add-contact', {
+        await fetch('/notify', {
           method: 'POST',
           body: JSON.stringify({
             "properties": {
@@ -69,6 +69,15 @@ export default function Home({ positioningIndex, hapiKey, gaKey }) {
       alert('Invalid email.');
     }
   }
+
+  const showForm = () => {
+    setShowEmail(true);
+    ReactGA.event({
+      category: 'CTA',
+      action: 'Click',
+      label: 'Sign Me Up Button clicked'
+    });
+  };
 
   const makeGoldAndBold = (text) =>
     <p className="text-5 my-2">
@@ -127,7 +136,7 @@ export default function Home({ positioningIndex, hapiKey, gaKey }) {
               submittedEmail ?
               <p className="text-5 py-4"><span className="gold-and-bold">Thank you</span> for signing up for email notifications. <span className="gold-and-bold">Stay tuned</span> for updates.</p> :
               !showEmail ?
-              <button className="btn" onClick={() => setShowEmail(true)}>
+              <button className="btn" onClick={showForm}>
                 {'SIGN ME UP!'}
               </button> :
               <div className="flex flex-col">
@@ -146,7 +155,7 @@ export default function Home({ positioningIndex, hapiKey, gaKey }) {
                     className="min-w-[250px] pt-1 pb-2 px-2 rounded-md mr-1 border-0 mt-4 font-sans text-trusty-500"
                     placeholder="Type email here for updates"
                     />
-                  <button className="btn" onClick={() => setShowEmail(true)}>
+                  <button className="btn" type="submit">
                     {'✓'}
                   </button>
                 </form>
