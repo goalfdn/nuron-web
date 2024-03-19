@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Script from "next/script";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import ReactGA from "react-ga4";
 
 const positioning = [
   {
@@ -18,10 +19,26 @@ const positioning = [
 const p2 = 'With Nuron, you can get things done and master your emotional well-being. Your tools? A customizable daily planner, wellness tracker, and your own life coach, A.I.D.E.N.!';
 const p3 = 'A.I.D.E.N. doesn\'t just organize your life; it gets you. As you turn plans to action and track your wellness, A.I.D.E.N. identifies patterns and creates personalized solutions so you can reach your goals faster and feel great while you\'re at it.'
 
-export default function Home({ positioningIndex, hapiKey }) {
+export default function Home({ positioningIndex, hapiKey, gaKey }) {
   const [showEmail, setShowEmail] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState(false);
   const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    ReactGA.initialize(gaKey); 
+    ReactGA.send({
+      hitType: "pageview",
+      page: `/${positioningIndex === 0 ? 'a' : 'b'}`,
+      title: "Page View For Position"
+    });
+    ReactGA.event({
+      category: "Positioning",
+      action: "Show",
+      label: `Positioning Option ${positioningIndex === 0 ? 'A' : 'B'}`,
+      value: positioningIndex,
+      nonInteraction: true,
+    });
+  }, [gaKey, positioningIndex]);
 
   const submitEmail = async (e) => {
     e.preventDefault();
@@ -69,6 +86,19 @@ export default function Home({ positioningIndex, hapiKey }) {
   
   return (
     <>
+    <Script 
+        src="https://www.googletagmanager.com/gtag/js?id=G-16NFZ82FW7" 
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-16NFZ82FW7');
+        `}
+      </Script>
       {/* Hotjar Tracking Code for https://www.thenuronway.com */}
       <Script id='hotjar'>
       {`
@@ -136,7 +166,8 @@ export async function getServerSideProps() {
   // Pass data to the page via props
   return { props: {
     positioningIndex: Math.round(Math.random()),
-    hapiKey: process.env.HAPIKEY
+    hapiKey: process.env.HAPIKEY,
+    gaKey: process.env.GAKEY
   }};
 }
 

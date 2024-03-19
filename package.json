@@ -11,7 +11,8 @@
   "dependencies": {
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-ga4": "^2.1.0"
   },
   "devDependencies": {
     "autoprefixer": "latest",
