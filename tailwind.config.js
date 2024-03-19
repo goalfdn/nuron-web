@@ -29,7 +29,8 @@ module.exports = {
         'trusty-400': '#083D34',
         'trusty-500': '#02231E',
         'text-black': '#090909',
-        'serenity': '#DAA520'
+        'serenity': '#DAA520',
+        'serenity-shade': '#BD9113'
       },
       container: {
         screens: {

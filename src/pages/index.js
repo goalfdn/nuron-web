@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Script from "next/script";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const positioning = [
   {
@@ -17,25 +18,52 @@ const positioning = [
 const p2 = 'With Nuron, you can get things done and master your emotional well-being. Your tools? A customizable daily planner, wellness tracker, and your own life coach, A.I.D.E.N.!';
 const p3 = 'A.I.D.E.N. doesn\'t just organize your life; it gets you. As you turn plans to action and track your wellness, A.I.D.E.N. identifies patterns and creates personalized solutions so you can reach your goals faster and feel great while you\'re at it.'
 
-export default function Home() {
-  
-  const [positioningIndex, setPositioningIndex] = useState(0);
+export default function Home({ positioningIndex, hapiKey }) {
+  const [showEmail, setShowEmail] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState(false);
+  const [email, setEmail] = useState('');
 
-  useEffect(() => {
-    setPositioningIndex(Math.round(Math.random()));
-  }, []);
+  const submitEmail = async (e) => {
+    e.preventDefault();
+    if (!!email && email.match(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+/)) {
+      // submit email to hubspot
+      
+      try {
+        await fetch('/api/add-contact', {
+          method: 'POST',
+          body: JSON.stringify({
+            "properties": {
+              "email": email,
+              "website": `trynuron.com/${positioningIndex === 0 ? 'a' : 'b'}`
+            }
+          }),
+          headers: new Headers({
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Bearer ${hapiKey}`
+          })
+        });
+        setSubmittedEmail(true);
+      } catch (e) {
+        alert('Failed to submit email. Please try again.');
+        console.error(e);
+      }
+    } else {
+      alert('Invalid email.');
+    }
+  }
 
   const makeGoldAndBold = (text) =>
     <p className="text-5 my-2">
     {
       text.split(' and ').map((subtext, index) =>
-      <>
+      <span key={index}>
         <span>{subtext}</span>
         {
           index !== text.split(' and ').length - 1 &&
           <span className="gold-and-bold">{' and '}</span>
         }
-      </>)
+      </span>)
     }
     </p>
   
@@ -54,17 +82,69 @@ export default function Home() {
           })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
       `}
       </Script>
-      <div className="h-screen v-screen bg-wp-a bg-cover">
-          <div className="container flex m-auto h-screen">
-            <div className="flex flex-col align-middle justify-center m-7">
-              <h1>{positioning[positioningIndex].title}</h1>
-              <h2>{positioning[positioningIndex].subtitle}</h2>
-              {makeGoldAndBold(positioning[positioningIndex].p1)}
-              {makeGoldAndBold(p2)}
-              {makeGoldAndBold(p3)}
-            </div>
+      <div className={`h-screen v-screen bg-center bg-cover ${positioningIndex === 0 ? 'bg-wp-a' : 'bg-wp-b'}`}>
+        <div className="container flex m-auto h-screen px-2 lg:px-0 flex-col justify-between">
+          <div className="flex flex-row justify-between m-2">
+            <Image src={'/logo.png'} alt="nuron logo" height={36} width={88} />
           </div>
+          <div className="flex flex-col items-start justify-center m-2">
+            <h1>{positioning[positioningIndex].title}</h1>
+            <h2 className="pt-1">{positioning[positioningIndex].subtitle}</h2>
+            {makeGoldAndBold(positioning[positioningIndex].p1)}
+            {makeGoldAndBold(p2)}
+            {makeGoldAndBold(p3)}
+            {
+              submittedEmail ?
+              <p className="text-5 py-4"><span className="gold-and-bold">Thank you</span> for signing up for email notifications. <span className="gold-and-bold">Stay tuned</span> for updates.</p> :
+              !showEmail ?
+              <button className="btn" onClick={() => setShowEmail(true)}>
+                {'SIGN ME UP!'}
+              </button> :
+              <div className="flex flex-col">
+                <div className="flex flex-row items-center mt-4">
+                  <PlatformButton type="apple" />
+                  <PlatformButton type="android" />
+                  <PlatformButton type="windows" />
+                  <PlatformButton type="macos" />
+                  <p className="text-sm font-sans font-black text-trusty-100">{'COMING SOON'}</p>
+                </div>
+                <form className="flex flex-row" action="#" onSubmit={submitEmail}>
+                  <input
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="min-w-[250px] pt-1 pb-2 px-2 rounded-md mr-1 border-0 mt-4 font-sans text-trusty-500"
+                    placeholder="Type email here for updates"
+                    />
+                  <button className="btn" onClick={() => setShowEmail(true)}>
+                    {'✓'}
+                  </button>
+                </form>
+              </div>
+            }
+          </div>
+          <div className="flex items-center justify-center">
+            <p className="text-footer mb-2">{'Copyright © Nuroverse 2024'}</p>
+          </div>
+        </div>
       </div>
     </>
+  );
+}
+
+export async function getServerSideProps() {
+  // Pass data to the page via props
+  return { props: {
+    positioningIndex: Math.round(Math.random()),
+    hapiKey: process.env.HAPIKEY
+  }};
+}
+
+function PlatformButton({ type }) {
+  return (
+    <div
+      className="mx-2 bg-center bg-contain bg-no-repeat aspect-square h-5"
+      style={{ backgroundImage: `url("/${type}.webp")` }}
+    />
   );
 }

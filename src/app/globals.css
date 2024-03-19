@@ -76,7 +76,9 @@ li {
 }
 
 h1, h2, h3, h4 {
-  @apply font-display;
+  @apply font-sans;
+  @apply font-bold;
+  @apply text-trusty-100;
 }
 
 h1 {
@@ -84,33 +86,49 @@ h1 {
   @apply md:text-5xl;
   @apply lg:text-6xl;
   @apply text-serenity;
+  @apply font-display;
 }
 
 h2 {
-  @apply text-3xl;
-  @apply md:text-4xl;
-  @apply lg:text-5xl;
-  @apply text-trusty-500;
+  @apply text-2xl;
+  @apply md:text-3xl;
+  @apply lg:text-4xl;
+  @apply mb-7;
 }
 
 h3 {
   @apply text-2xl;
   @apply md:text-3xl;
   @apply lg:text-4xl;
-  @apply text-trusty-300;
 }
 
 h4 {
   @apply text-2xl;
   @apply md:text-3xl;
   @apply lg:text-4xl;
-  @apply text-trusty-400;
 }
 
 h5 {
   @apply text-xl;
   @apply md:text-2xl;
   @apply lg:text-3xl;
+}
+
+.btn {
+  @apply rounded-md;
+  @apply bg-serenity;
+  @apply hover:bg-serenity-shade;
+  @apply px-4;
+  @apply pt-1;
+  @apply pb-2;
+  @apply mt-4;
+  @apply shadow-md;
+  @apply hover:shadow-sm;
+  @apply text-trusty-500;
+  @apply text-lg;
+  @apply font-sans;
+  @apply font-semibold;
+  @apply hover:font-bold;
 }
 
 .gold-and-bold {
@@ -156,4 +174,11 @@ h5 {
   @apply md:text-lg;
   @apply lg:text-xl;
   @apply font-normal;
+}
+
+.text-footer {
+  @apply font-sans;
+  @apply text-base;
+  @apply font-normal;
+  @apply text-serenity;
 }
