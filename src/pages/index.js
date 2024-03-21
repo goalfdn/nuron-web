@@ -115,8 +115,8 @@ export default function Home({ positioningIndex, hapiKey, gaKey }) {
           })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
       `}
       </Script>
-      <div className={`h-screen v-screen bg-center bg-cover ${positioningIndex === 0 ? 'bg-wp-a' : 'bg-wp-b'}`}>
-        <div className="container flex m-auto h-screen px-2 lg:px-0 flex-col justify-between">
+      <div className={`h-full v-screen bg-center bg-cover ${positioningIndex === 0 ? 'bg-wp-a' : 'bg-wp-b'}`}>
+        <div className="container flex m-auto h-full px-2 flex-col justify-between">
           <div className="flex flex-row justify-between m-2">
             <Image src={'/logo.png'} alt="nuron logo" height={36} width={88} />
           </div>
@@ -143,10 +143,10 @@ export default function Home({ positioningIndex, hapiKey, gaKey }) {
                 </div>
                 <form className="flex flex-row" action="#" onSubmit={submitEmail}>
                   <input
-                    type="text"
+                    type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="min-w-[250px] pt-1 pb-2 px-2 rounded-md mr-1 border-0 mt-4 font-sans text-trusty-500"
+                    className="max-w-[75vw] md:max-w-[250px] pt-1 pb-2 px-2 rounded-md mr-1 border-0 mt-4 font-sans text-trusty-500"
                     placeholder="Type email here for updates"
                     />
                   <button className="btn" type="submit">
@@ -156,7 +156,7 @@ export default function Home({ positioningIndex, hapiKey, gaKey }) {
               </div>
             }
           </div>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center pt-7">
             <p className="text-footer mb-2">{'Copyright © Nuroverse 2024'}</p>
           </div>
         </div>
