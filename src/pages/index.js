@@ -115,7 +115,7 @@ export default function Home({ positioningIndex, hapiKey, gaKey }) {
           })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
       `}
       </Script>
-      <div className={`h-full v-screen bg-center bg-cover ${positioningIndex === 0 ? 'bg-wp-a' : 'bg-wp-b'}`}>
+      <div className={`h-screen bg-center bg-cover ${positioningIndex === 0 ? 'bg-wp-a' : 'bg-wp-b'}`}>
         <div className="container flex m-auto h-full px-2 flex-col justify-between">
           <div className="flex flex-row justify-between m-2">
             <Image src={'/logo.png'} alt="nuron logo" height={36} width={88} />
