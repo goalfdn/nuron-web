@@ -9,6 +9,16 @@ const nextConfig = {
             },
         ]
     },
+    async redirects() {
+        return [
+            // Basic redirect
+            {
+                source: '/privacy',
+                destination: 'https://goal-connects.s3.amazonaws.com/Online+Privacy+Policy+(3).pdf',
+                permanent: true,
+            },
+        ]
+    },
 }
 
 module.exports = nextConfig
