@@ -4,11 +4,11 @@ export default function Privacy() {
 
   return (
     <>
-    <div className="bg-trusty-50">
+    <div className="bg-trusty-500">
       <div className="container mx-auto px-4 py-12">
-      <h2 className="pb-5">{"Nuron's Privacy Policy"}</h2>
+      <h2 className="pb-5 text-serenity-shade">{"Nuron's Privacy Policy"}</h2>
       <p className="text-5">{
-        "Protecting your private information is our priority. This Statement of Privacy applies to Nuron, and Gift of a Life Foundation and governs data collection and usage. For the purposes of this Privacy Policy, unless otherwise noted, all references to Gift of a Life Foundation include www.goalfoundation.us and Nuron. The Nuron application is a health & fitness application. By using the Nuron application, you consent to the data practices described in this statement."
+        "Protecting your private information is our priority. This Statement of Privacy applies to Nuron, and Nuroverse Inc and governs data collection and usage. The Nuron application is a health & fitness application. By using the Nuron application, you consent to the data practices described in this statement."
       }</p>
       <h5 className="pt-5 pb-2">Collection of your Personal Information</h5>
       <p className="text-5">{
@@ -29,13 +29,16 @@ export default function Privacy() {
         "Subject to certain exceptions set out below, on receipt of a verifiable request from you, we will:"
       }</p>
       <ul>
-        <li className={`ml-12 -indent-12 text-5 before:content-[""] before:inline-block before:bg-checked-box before:bg-contain before:bg-no-repeat before:bg-center before:w-[2rem] before:h-[2rem] before:mr-4 before:align-bottom my-2 sm:my-4`}>
+        <li>
           {"Delete your personal information from our records; and"}
         </li>
         <li>
           {"Direct any service providers to delete your personal information from their records."}
         </li>
       </ul>
+      <p className="text-5">{
+        "To request deletion, please visit https://trynuron.com/contact and follow steps to reach out to us directly."
+      }</p>
       <p className="text-5">{
         "Please note that we may not be able to comply with requests to delete your personal information if it is necessary to:"
       }</p>
@@ -79,29 +82,37 @@ export default function Privacy() {
       <p className="text-5 py-2">{
         "If you would like to stop receiving marketing or promotional communications via email from Nuron, you may opt out of such communications by following the Unsubscribe link at the bottom of any email communication."
       }</p>
+      <h5 className="pt-5 pb-2">External Data Storage Sites</h5>
+      <p className="text-5">{
+        "We may store your data on servers provided by third-party hosting vendors with whom we have contracted."
+      }</p>
       <h5 className="pt-5 pb-2">Changes to this Statement</h5>
       <p className="text-5">{
         "Nuron reserves the right to change this Privacy Policy from time to time. We will notify you about significant changes in the way we treat personal information by sending a notice to the primary email address specified in your account, by placing a prominent notice on our application, and/or by updating any privacy information. Your continued use of the application and/or Services available after such modifications will constitute your: (a) acknowledgment of the modified Privacy Policy; and (b) agreement to abide and be bound by that Policy."
       }</p>
       <h5 className="pt-5 pb-2">Contact Information</h5>
       <p className="text-5">{
-        "Nuron welcomes your questions or comments regarding this Statement of Privacy. If you believe that Nuron has not adhered to this Statement, please contact Nuron at:"
+        "We welcome your questions or comments regarding this Statement of Privacy. If you believe that Nuron has not adhered to this Statement, please contact Nuroverse Inc at:"
       }</p>
-      <pre className="py-5">{
-`Gift of a Life Foundation
-6104 Old Fredericksburg Rd, Unit 91505
-Austin, Texas 78709`
+      <pre className="py-5 text-trusty-200">{
+`Nuroverse Inc
+5900 Balcones Dr #7434
+Austin, Texas 78731`
       }</pre>
-      <pre className="pb-5">{
+      <pre className="pb-5 text-trusty-200">{
 `Email Address:
-support@goalfoundation.us`
+support@nuroverse.co`
       }</pre>
-      <p className="text-5">{"Effective as of November 14, 2023"}</p>
+      <pre className="pb-5 text-trusty-200">{
+`Phone Number:
++1 512-720-6071`
+      }</pre>
+      <p className="text-5">{"Effective as of October 14, 2024"}</p>
       </div>
     </div>
     <div className='snap-start'>
       <p className='w-screen text-center text-5 text-serenity py-8'>
-        <span>Copyright &copy; 2023</span>
+        <span>Copyright &copy; 2024</span>
         <span>{' • '}</span>
         <Link href='/' className='hover:underline'>Home</Link>
       </p>
