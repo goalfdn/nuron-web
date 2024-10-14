@@ -6,7 +6,7 @@ const nextConfig = {
             {
                 source: '/notify',
                 destination: 'https://api.hubapi.com/crm/v3/objects/contacts',
-            },
+            }
         ]
     },
 }

@@ -13,6 +13,10 @@ module.exports = {
       'display': ['var(--font-ta)', 'sans-serif']
     },
     extend: {
+      aspectRatio: {
+        'ios': '3',
+        'android': '3.375'
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

@@ -1,28 +1,25 @@
+import ImageContainer from "@/components/image-container";
 import Image from "next/image";
 import Script from "next/script";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import ReactGA from "react-ga4";
 
 const positioning = [
   {
-    title: 'Goodbye, chaos!',
-    subtitle: 'Your shortcut to a hassle-free life.',
-    p1: 'Balancing your work, errands, family, social life and your well-being can be stressful. We get it. That\'s why we built the Nuron app.'
+    title: 'Feel understood,',
+    subtitle: 'not just responded to',
+    p1: `Got something weighing on your mind? Want to talk about it without judgement? Want to work through life's challenges with a thoughtful and understanding expert?`
   },
   {
-    title: 'Don\'t compromise.',
-    subtitle: 'You can have it all, minus the burnout.',
-    p1: 'Feeling overwhelmed, balancing work, family and your well-being? Let the Nuron app simplify things for you.'
+    title: 'Discover clarity,',
+    subtitle: 'not just answers',
+    p1: 'Looking to unlock your potential? Ready to tackle obstacles with guidance tailored just for you? Need a supportive partner to help navigate your thoughts and aspirations?'
   }
 ];
 
-const p2 = 'With Nuron, you can get things done and master your emotional well-being. Your tools? A customizable daily planner, wellness tracker, and your own life coach, A.I.D.E.N.!';
-const p3 = 'A.I.D.E.N. doesn\'t just organize your life; it gets you. As you turn plans to action and track your wellness, A.I.D.E.N. identifies patterns and creates personalized solutions so you can reach your goals faster and feel great while you\'re at it.'
+const p2 = 'Nuron is for you.';
 
 export default function Home({ positioningIndex, hapiKey, gaKey }) {
-  const [showEmail, setShowEmail] = useState(false);
-  const [submittedEmail, setSubmittedEmail] = useState(false);
-  const [email, setEmail] = useState('');
 
   useEffect(() => {
     ReactGA.initialize(gaKey); 
@@ -40,52 +37,21 @@ export default function Home({ positioningIndex, hapiKey, gaKey }) {
     });
   }, [gaKey, positioningIndex]);
 
-  const submitEmail = async (e) => {
-    e.preventDefault();
-    if (!!email && email.match(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+/)) {
-      // submit email to hubspot
-      
-      try {
-        await fetch('/api/notify', {
-          method: 'POST',
-          body: JSON.stringify({ email, hapiKey, positioningIndex }),
-          headers: new Headers({
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          })
-        });
-        setSubmittedEmail(true);
-      } catch (e) {
-        alert('Failed to submit email. Please try again.');
-        console.error(e);
-      }
-    } else {
-      alert('Invalid email.');
-    }
-  }
-
-  const showForm = () => {
-    setShowEmail(true);
+  const iOSClicked = () => {
     ReactGA.event({
       category: 'CTA',
       action: 'Click',
-      label: 'Sign Me Up Button clicked'
+      label: 'Download iOS clicked'
     });
   };
 
-  const makeGoldAndBold = (text) =>
-    <p className="text-5 my-2">
-    {
-      text.split(' and ').map((subtext, index) =>
-      <span key={index}>
-        <span>{subtext}</span>
-        {
-          index !== text.split(' and ').length - 1 &&
-          <span className="gold-and-bold">{' and '}</span>
-        }
-      </span>)
-    }
-    </p>
+  const androidClicked = () => {
+    ReactGA.event({
+      category: 'CTA',
+      action: 'Click',
+      label: 'Download Android clicked'
+    });
+  };
   
   return (
     <>
@@ -123,38 +89,16 @@ export default function Home({ positioningIndex, hapiKey, gaKey }) {
           <div className="flex flex-col items-start justify-center m-2">
             <h1>{positioning[positioningIndex].title}</h1>
             <h2 className="pt-1">{positioning[positioningIndex].subtitle}</h2>
-            {makeGoldAndBold(positioning[positioningIndex].p1)}
-            {makeGoldAndBold(p2)}
-            {makeGoldAndBold(p3)}
-            {
-              submittedEmail ?
-              <p className="text-5 py-4"><span className="gold-and-bold">Thank you</span> for signing up for email notifications. <span className="gold-and-bold">Stay tuned</span> for updates.</p> :
-              !showEmail ?
-              <button className="btn" onClick={showForm}>
-                {'SIGN ME UP!'}
-              </button> :
-              <div className="flex flex-col">
-                <div className="flex flex-row items-center mt-4">
-                  <PlatformButton type="apple" />
-                  <PlatformButton type="android" />
-                  <PlatformButton type="windows" />
-                  <PlatformButton type="macos" />
-                  <p className="text-sm font-sans font-black text-trusty-100">{'COMING SOON'}</p>
-                </div>
-                <form className="flex flex-row" action="#" onSubmit={submitEmail}>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="max-w-[75vw] md:max-w-[250px] pt-1 pb-2 px-2 rounded-md mr-1 border-0 mt-4 font-sans text-trusty-500"
-                    placeholder="Type email here for updates"
-                    />
-                  <button className="btn" type="submit">
-                    {'✓'}
-                  </button>
-                </form>
+            <p className="text-5 my-2">{positioning[positioningIndex].p1}</p>
+            <p className="text-5 my-2 !text-trusty-200 !font-medium">{p2}</p>
+            <div className="flex flex-row justify-start items-stretch mt-7 h-12 w-full">
+              <div className="flex aspect-ios mr-4 hover:cursor-pointer" onClick={iOSClicked}>
+                <ImageContainer src={'/app-store.svg'} alt="Download on iOS App Store" />
               </div>
-            }
+              <div className="flex aspect-android hover:cursor-pointer" onClick={androidClicked}>
+                <ImageContainer src={'/play-store.png'} alt="Get it on Google Play" />
+              </div>
+            </div>
           </div>
           <div className="flex items-center justify-center pt-7">
             <p className="text-footer mb-2">{'Copyright © Nuroverse 2024'}</p>
@@ -172,13 +116,4 @@ export async function getServerSideProps() {
     hapiKey: process.env.HAPIKEY,
     gaKey: process.env.GAKEY
   }};
-}
-
-function PlatformButton({ type }) {
-  return (
-    <div
-      className="mx-2 bg-center bg-contain bg-no-repeat aspect-square h-5"
-      style={{ backgroundImage: `url("/${type}.webp")` }}
-    />
-  );
 }

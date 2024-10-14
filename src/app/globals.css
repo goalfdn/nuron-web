@@ -86,21 +86,23 @@ h1 {
   @apply md:text-5xl;
   @apply lg:text-6xl;
   @apply text-serenity;
-  @apply font-display;
+  @apply font-normal;
 }
 
 h2 {
   @apply text-2xl;
   @apply md:text-3xl;
   @apply lg:text-4xl;
-  @apply font-semibold;
+  @apply font-medium;
   @apply mb-7;
 }
 
 h3 {
-  @apply text-2xl;
-  @apply md:text-3xl;
-  @apply lg:text-4xl;
+  @apply text-xl;
+  @apply md:text-2xl;
+  @apply lg:text-3xl;
+  @apply font-medium;
+  @apply text-trusty-200;
 }
 
 h4 {
