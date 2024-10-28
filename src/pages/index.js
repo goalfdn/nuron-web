@@ -99,6 +99,11 @@ export default function Home({ positioningIndex, hapiKey, gaKey }) {
                 <ImageContainer src={'/play-store.png'} alt="Get it on Google Play" />
               </div>
             </div>
+            <div class="mt-7">
+              <a href='https://chataiden.com/' class='text-5 font-bold !text-serenity-shade hover:!text-serenity'>
+                <span class="underline underline-offset-4">or sign up on our website</span><span>{' ›'}</span>
+              </a>
+            </div>
           </div>
           <div className="flex items-center justify-center pt-7">
             <p className="text-footer mb-2">{'Copyright © Nuroverse 2024'}</p>
