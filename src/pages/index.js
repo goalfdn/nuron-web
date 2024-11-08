@@ -38,6 +38,9 @@ export default function Home({ positioningIndex, hapiKey, gaKey }) {
   }, [gaKey, positioningIndex]);
 
   const iOSClicked = () => {
+    if (typeof window !== 'undefined') {
+      window.location.href = 'https://apps.apple.com/us/app/nuron-your-emotional-compass/id6736627776';
+    }
     ReactGA.event({
       category: 'CTA',
       action: 'Click',
@@ -46,6 +49,9 @@ export default function Home({ positioningIndex, hapiKey, gaKey }) {
   };
 
   const androidClicked = () => {
+    if (typeof window !== 'undefined') {
+      window.location.href = 'https://play.google.com/store/apps/details?id=com.nuroverse.Nuron&pli=1';
+    }
     ReactGA.event({
       category: 'CTA',
       action: 'Click',
@@ -99,9 +105,9 @@ export default function Home({ positioningIndex, hapiKey, gaKey }) {
                 <ImageContainer src={'/play-store.png'} alt="Get it on Google Play" />
               </div>
             </div>
-            <div class="mt-7">
-              <a href='https://chataiden.com/' class='text-5 font-bold !text-serenity-shade hover:!text-serenity'>
-                <span class="underline underline-offset-4">or sign up on our website</span><span>{' ›'}</span>
+            <div className="mt-7">
+              <a href='https://chataiden.com/' className='text-5 font-bold !text-serenity-shade hover:!text-serenity'>
+                <span className="underline underline-offset-4">or sign up on our website</span><span>{' ›'}</span>
               </a>
             </div>
           </div>
